@@ -1,5 +1,5 @@
 import pytest
-from solutions.day02 import calculate_score_for_one_round, Sign
+from day02 import calculate_score_for_one_round, Sign
 
 
 @pytest.parametrize(

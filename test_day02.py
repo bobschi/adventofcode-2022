@@ -2,6 +2,7 @@ import pytest
 from day02 import (
     calculate_score_for_one_round,
     calculate_score_for_multiple_rounds,
+    read_strategy_guide_from_file,
     Sign,
 )
 
@@ -34,13 +35,13 @@ def test_calculate_score_for_strategy_guide():
 
 
 def test_read_strategy_guide_from_file():
-    path_to_strategy_guide = "inputs/day02_sample.text"
+    path_to_strategy_guide = "inputs/day02_sample.txt"
     expected_moves = (
         (Sign.ROCK, Sign.PAPER),
         (Sign.PAPER, Sign.ROCK),
         (Sign.SCISSORS, Sign.SCISSORS),
     )
 
-    moves = test_read_strategy_guide_from_file(path_to_strategy_guide)
+    moves = read_strategy_guide_from_file(path_to_strategy_guide)
 
     assert moves == expected_moves

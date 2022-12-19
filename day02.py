@@ -62,6 +62,10 @@ def read_strategy_guide_from_file(path_to_strategy_guide: Path) -> Moves:
     return tuple(moves)
 
 
+def calculate_required_move(opponent_move: Sign, desired_outcome: Result) -> Sign:
+    ...
+
+
 def solve_day_two(
     path_to_strategy_guide: Path = typer.Argument("inputs/day02_input.txt"),
 ) -> None:

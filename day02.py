@@ -30,3 +30,7 @@ OUTCOMES: dict[Sign, dict[Sign, Result]] = {
         Sign.SCISSORS: Result.DRAW,
     },
 }
+
+
+def calculate_score_for_one_round(opponent_move: Sign, player_move: Sign) -> int:
+    return player_move.value + OUTCOMES[opponent_move][player_move].value

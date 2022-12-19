@@ -34,3 +34,10 @@ OUTCOMES: dict[Sign, dict[Sign, Result]] = {
 
 def calculate_score_for_one_round(opponent_move: Sign, player_move: Sign) -> int:
     return player_move.value + OUTCOMES[opponent_move][player_move].value
+
+
+Move = tuple[Sign, Sign]
+
+
+def calculate_score_for_multiple_rounds(moves: tuple[Move]) -> int:
+    return sum([calculate_score_for_one_round(move[0], move[1]) for move in moves])

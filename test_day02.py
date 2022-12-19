@@ -31,3 +31,16 @@ def test_calculate_score_for_strategy_guide():
 
     result = calculate_score_for_multiple_rounds(moves)
     assert result == expected_result, "Think of a good hint here."
+
+
+def test_read_strategy_guide_from_file():
+    path_to_strategy_guide = "inputs/day02_sample.text"
+    expected_moves = (
+        (Sign.ROCK, Sign.PAPER),
+        (Sign.PAPER, Sign.ROCK),
+        (Sign.SCISSORS, Sign.SCISSORS),
+    )
+
+    moves = test_read_strategy_guide_from_file(path_to_strategy_guide)
+
+    assert moves == expected_moves

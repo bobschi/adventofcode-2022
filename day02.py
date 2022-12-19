@@ -37,7 +37,8 @@ def calculate_score_for_one_round(opponent_move: Sign, player_move: Sign) -> int
 
 
 Move = tuple[Sign, Sign]
+Moves = tuple[Move]
 
 
-def calculate_score_for_multiple_rounds(moves: tuple[Move]) -> int:
+def calculate_score_for_multiple_rounds(moves: Moves) -> int:
     return sum([calculate_score_for_one_round(move[0], move[1]) for move in moves])

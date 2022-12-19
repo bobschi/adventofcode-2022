@@ -2,8 +2,8 @@ import pytest
 from day02 import calculate_score_for_one_round, Sign
 
 
-@pytest.parametrize(
-    "opponent_move,player_move,expected_result",
+@pytest.mark.parametrize(
+    "opponent_move,player_move,expected_score",
     [
         (Sign.ROCK, Sign.PAPER, 8),
         (Sign.PAPER, Sign.ROCK, 1),
@@ -11,8 +11,7 @@ from day02 import calculate_score_for_one_round, Sign
     ],
 )
 def test_calculate_score_for_one_round(
-    opponent_move: Sign, player_move: Sign, expected_result: int
+    opponent_move: Sign, player_move: Sign, expected_score: int
 ):
-    result = calculate_score_for_one_round(opponent_move, player_move)
-    assert result == expected_result, "Your calculated result is incorrect."
-
+    score = calculate_score_for_one_round(opponent_move, player_move)
+    assert score == expected_score, "Your calculated result is incorrect."

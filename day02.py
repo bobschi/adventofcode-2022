@@ -1,6 +1,8 @@
 from enum import Enum
 from pathlib import Path
 
+import typer
+
 
 class Sign(Enum):
     ROCK = 1
@@ -58,3 +60,16 @@ def read_strategy_guide_from_file(path_to_strategy_guide: Path) -> Moves:
         moves.append((opponent_moves[opponent_move], player_moves[player_move]))
 
     return tuple(moves)
+
+
+def solve_day_two(
+    path_to_strategy_guide: Path = typer.Argument("inputs/day02_input.txt"),
+) -> None:
+    moves = read_strategy_guide_from_file(path_to_strategy_guide)
+    score = calculate_score_for_multiple_rounds(moves)
+
+    print(f"The final score is {score}")
+
+
+if __name__ == "__main__":
+    typer.run(solve_day_two)

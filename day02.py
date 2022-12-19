@@ -1,4 +1,5 @@
 from enum import Enum
+from pathlib import Path
 
 
 class Sign(Enum):
@@ -42,3 +43,18 @@ Moves = tuple[Move]
 
 def calculate_score_for_multiple_rounds(moves: Moves) -> int:
     return sum([calculate_score_for_one_round(move[0], move[1]) for move in moves])
+
+
+def read_strategy_guide_from_file(path_to_strategy_guide: Path) -> Moves:
+    opponent_moves = {"A": Sign.ROCK, "B": Sign.PAPER, "C": Sign.SCISSORS}
+    player_moves = {"X": Sign.ROCK, "Y": Sign.PAPER, "Z": Sign.SCISSORS}
+
+    with open(path_to_strategy_guide, "r") as strategy_guide_file:
+        strategy_guide = strategy_guide_file.read()
+
+    moves: list[Move] = []
+    for line in strategy_guide.split("\n"):
+        opponent_move, player_move = line.split(" ")
+        moves.append((opponent_moves[opponent_move], player_moves[player_move]))
+
+    return tuple(moves)

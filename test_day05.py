@@ -6,14 +6,14 @@ from day05 import (
     Stack,
     Stackpile,
     execute_movement_plan,
-    move_multiple_crates_at_once,
-    parse_instruction,
-    read_scenario,
     get_top,
     move_crate,
     move_crates,
+    move_multiple_crates_at_once,
+    parse_instruction,
     peek_top,
     put_crate_on_top,
+    read_scenario,
 )
 
 

@@ -88,7 +88,6 @@ def test_create_groups_from_input():
     path_to_packing_lists = "inputs/day03_sample.txt"
     expected_groups = (
         Group(
-            badge="r",
             rucksacks=(
                 pack_into_rucksack("vJrwpWtwJgWrhcsFMMfFFhFp"),
                 pack_into_rucksack("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"),
@@ -96,7 +95,6 @@ def test_create_groups_from_input():
             ),
         ),
         Group(
-            badge="Z",
             rucksacks=(
                 pack_into_rucksack("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"),
                 pack_into_rucksack("ttgJtRGJQctTZtZT"),
@@ -110,9 +108,3 @@ def test_create_groups_from_input():
     assert len(groups) == len(
         expected_groups
     ), "You are either making too many or too few groups."
-    assert (
-        groups[0].badge == expected_groups[0].badge
-    ), "You messed up the first group's badge."
-    assert (
-        groups[1].badge == expected_groups[1].badge
-    ), "You messed up the second group's badge."

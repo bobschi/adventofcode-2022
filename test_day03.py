@@ -4,6 +4,8 @@ from day03 import (
     create_rucksacks_from_packing_lists,
     calculate_shared_item_priority,
     find_shared_item_type,
+    Group,
+    create_groups_from_rucksacks,
 )
 import pytest
 
@@ -80,3 +82,37 @@ def test_create_rucksacks_from_input():
     assert (
         expected_rucksacks == rucksacks
     ), "Your rucksacks don't hold the expected contents."
+
+
+def test_create_groups_from_input():
+    path_to_packing_lists = "inputs/day03_sample.txt"
+    expected_groups = (
+        Group(
+            badge="r",
+            rucksacks=(
+                pack_into_rucksack("vJrwpWtwJgWrhcsFMMfFFhFp"),
+                pack_into_rucksack("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"),
+                pack_into_rucksack("PmmdzqPrVvPwwTWBwg"),
+            ),
+        ),
+        Group(
+            badge="Z",
+            rucksacks=(
+                pack_into_rucksack("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"),
+                pack_into_rucksack("ttgJtRGJQctTZtZT"),
+                pack_into_rucksack("CrZsJsPPZsGzwwsLwLmpwMDw"),
+            ),
+        ),
+    )
+
+    groups = create_groups_from_rucksacks(path_to_packing_lists)
+
+    assert len(groups) == len(
+        expected_groups
+    ), "You are either making too many or too few groups."
+    assert (
+        groups[0].badge == expected_groups[0].badge
+    ), "You messed up the first group's badge."
+    assert (
+        groups[1].badge == expected_groups[1].badge
+    ), "You messed up the second group's badge."

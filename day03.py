@@ -47,5 +47,15 @@ def part_one():
     print(sum_of_priorities)
 
 
+@dataclass(frozen=True)
+class Group:
+    badge: str
+    rucksacks: list[Rucksack]
+
+
+def create_groups_from_rucksacks(path_to_packing_lists: Path) -> tuple[Group]:
+    ...
+
+
 if __name__ == "__main__":
     part_one()

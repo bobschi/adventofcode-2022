@@ -10,8 +10,9 @@ def peek_top(stack: Stack) -> Crate:
 
 
 def get_top(stack: Stack) -> tuple[Crate, Stack]:
-    old_top = stack.pop(0)
-    return (old_top, stack)
+    old_top = stack[0]
+    new_stack = stack[1:]
+    return (old_top, new_stack)
 
 
 def move_crate(from_stack: Stack, to_stack: Stack) -> tuple[Stack, Stack]:

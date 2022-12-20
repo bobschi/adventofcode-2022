@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import Path
 
 
 @dataclass(frozen=True)
@@ -17,6 +18,10 @@ class Rucksack:
 
         return ord(self.shared_item_type) - 96
 
+    @property
+    def contents(self) -> str:
+        return f"{self.compartment_one}{self.compartment_two}"
+
 
 def pack_into_rucksack(contents: str) -> Rucksack:
     length = len(contents)
@@ -24,3 +29,7 @@ def pack_into_rucksack(contents: str) -> Rucksack:
         compartment_one=contents[: length // 2],
         compartment_two=contents[length // 2 :],
     )
+
+
+def create_rucksacks_from_packing_lists(path_to_packing_lists: Path) -> list[Rucksack]:
+    ...

@@ -1,7 +1,7 @@
 import pytest
 from pytest_lazyfixture import lazy_fixture
 
-from day05 import Crate, Stack, get_top, move_crate, peek_top
+from day05 import Crate, Stack, get_top, move_crate, peek_top, put_crate_on_top
 
 
 @pytest.fixture
@@ -74,21 +74,21 @@ def test_put_crate_on_top(stack: Stack, crate: Crate, expected_stack: Stack):
 
 
 @pytest.mark.parametrize(
-    "stack_a,stack_b,expected_new_top_a,expected_new_top_b",
+    "from_stack,to_stack,expected_new_top_a,expected_new_top_b",
     [
         (lazy_fixture("stack_c"), lazy_fixture("stack_a"), "", "P"),
-        (lazy_fixture("stack_a"), lazy_fixture("stack_b"), "Z", "N"),
+        (lazy_fixture("stack_b"), ["T"], "C", "D"),
     ],
 )
 def test_move_crate(
-    stack_a: Stack,
-    stack_b: Stack,
+    from_stack: Stack,
+    to_stack: Stack,
     expected_new_top_a: Crate,
     expected_new_top_b: Crate,
 ):
-    old_size_a, old_size_b = len(stack_a), len(stack_b)
+    old_size_a, old_size_b = len(from_stack), len(to_stack)
 
-    new_stack_a, new_stack_b = move_crate(stack_a, stack_b)
+    new_stack_a, new_stack_b = move_crate(from_stack, to_stack)
 
     new_top_a, new_top_b = peek_top(new_stack_a), peek_top(new_stack_b)
     new_size_a, new_size_b = len(new_stack_a), len(new_stack_b)

@@ -101,7 +101,7 @@ def move_multiple_crates_at_once(
 def solve_part_one() -> None:
     stackpile, movement_plan = read_scenario("inputs/day05_input.txt")
 
-    final_stackpile = execute_movement_plan(stackpile, movement_plan)
+    final_stackpile = execute_movement_plan(stackpile, movement_plan, move_crates)
 
     tops = [peek_top(stack) for stack in final_stackpile]
     message = "".join(tops)
@@ -109,5 +109,19 @@ def solve_part_one() -> None:
     print(f"The solution for part one is {message}")
 
 
+def solve_part_two() -> None:
+    stackpile, movement_plan = read_scenario("inputs/day05_input.txt")
+
+    final_stackpile = execute_movement_plan(
+        stackpile, movement_plan, move_multiple_crates_at_once
+    )
+
+    tops = [peek_top(stack) for stack in final_stackpile]
+    message = "".join(tops)
+
+    print(f"The solution for part two is {message}")
+
+
 if __name__ == "__main__":
     solve_part_one()
+    solve_part_two()

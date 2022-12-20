@@ -10,6 +10,10 @@ class Rucksack:
     def shared_item_type(self) -> str:
         return (set(self.compartment_one) & set(self.compartment_two)).pop()
 
+    @property
+    def shared_item_priority(self) -> int:
+        ...
+
 
 def pack_into_rucksack(contents: str) -> Rucksack:
     length = len(contents)

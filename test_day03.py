@@ -39,3 +39,16 @@ def test_shared_item_type(contents: str, expected_shared_type: str):
     shared_type = packed_rucksack.shared_item_type
 
     assert shared_type == expected_shared_type, "You found the wrong shared type."
+
+
+@pytest.mark.parametrize(
+    "contents,expected_priority",
+    [("pp", 16), ("LL", 38), ("PP", 42), ("vv", 22), ("tt", 20), ("ss", 19)],
+)
+def test_shared_item_priority(contents: str, expected_priority: int):
+    packed_rucksack = pack_into_rucksack(contents)
+
+    assert packed_rucksack.shared_item_priority == expected_priority, (
+        "Either you are finding the wrong shared item -- Are other tests failing? -- or"
+        "you are assigning the wrong priority."
+    )

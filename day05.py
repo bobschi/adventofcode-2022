@@ -14,5 +14,4 @@ def get_top(stack: Stack) -> tuple[Crate, Stack]:
     return (old_top, stack)
 
 
-def move_crate(from_stack: Stack, to_stack: Stack, number: int) -> tuple[Stack, Stack]:
-    ...
+def move_crate(from_stack: Stack, to_stack: Stack) -> tuple[Stack, Stack]:

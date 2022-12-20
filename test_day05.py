@@ -74,7 +74,7 @@ def test_move_crate(
 ):
     old_size_a, old_size_b = len(stack_a), len(stack_b)
 
-    new_stack_a, new_stack_b = move_crate(stack_a, stack_b, 1)
+    new_stack_a, new_stack_b = move_crate(stack_a, stack_b)
 
     new_top_a, new_top_b = peek_top(new_stack_a), peek_top(new_stack_b)
     new_size_a, new_size_b = len(new_stack_a), len(new_stack_b)

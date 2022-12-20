@@ -16,4 +16,4 @@ def pack_into_rucksack(contents: str) -> Rucksack:
 
 
 def find_shared_item_type(rucksack: Rucksack) -> str:
-    ...
+    return (set(rucksack.compartment_one) & set(rucksack.compartment_two)).pop()

@@ -91,7 +91,7 @@ def solve_part_one() -> None:
 
     final_stackpile = execute_movement_plan(stackpile, movement_plan)
 
-    tops = [peek_top(stack) for stack in stackpile]
+    tops = [peek_top(stack) for stack in final_stackpile]
     message = "".join(tops)
 
     print(f"The solution for part one is {message}")

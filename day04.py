@@ -53,7 +53,7 @@ def do_assigments_overlap(pair: Pair) -> bool:
     """
     Return True if assigned ranges overlap at least partially.
     """
-    ...
+    return not pair.elf_a.get_assignment().isdisjoint(pair.elf_b.get_assignment())
 
 
 def solve_part_one() -> None:

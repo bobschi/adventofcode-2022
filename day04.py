@@ -31,4 +31,17 @@ def set_up_pairs(path_to_pair_list: Path) -> tuple[Pair]:
     """
     Return a list of pairs of elves generated from a correctly formatted input file.
     """
-    ...
+    with open(path_to_pair_list) as pair_list_file:
+        pair_list = pair_list_file.read()
+
+    def create_elf(range_string: str) -> Elf:
+        assigment_range = range_string.split("-")
+        assignment_start, assigment_end = map(int, assigment_range)
+        return Elf(assignment_start, assigment_end)
+
+    pairs = []
+    for pairing in pair_list.splitlines():
+        elf_a_range, elf_b_range = pairing.split(",")
+        pairs.append(Pair(create_elf(elf_a_range), create_elf(elf_b_range)))
+
+    return tuple(pairs)

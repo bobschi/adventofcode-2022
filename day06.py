@@ -17,14 +17,9 @@ find_start_of_packet_marker = partial(find_marker, 4)
 find_start_of_message_marker = partial(find_marker, 14)
 
 
-def solve_part_one() -> None:
+if __name__ == "__main__":
     with open("inputs/day06.txt") as file:
         datastream = file.read()
 
-    index = find_start_of_packet_marker(datastream)
-
-    print(f"The solution for part one is {index}")
-
-
-if __name__ == "__main__":
-    solve_part_one()
+    print(f"The solution for part one is {find_start_of_packet_marker(datastream)}")
+    print(f"The solution for part one is {find_start_of_message_marker(datastream)}")

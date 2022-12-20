@@ -63,5 +63,13 @@ def solve_part_one() -> None:
     print(f"The solution for part one is {total_overlaps}")
 
 
+def solve_part_two() -> None:
+    pairs = set_up_pairs("inputs/day04_input.txt")
+    overlaps = tuple(filter(do_assigments_overlap, pairs))
+
+    print(f"The solution for part two is {len(overlaps)}")
+
+
 if __name__ == "__main__":
     solve_part_one()
+    solve_part_two()

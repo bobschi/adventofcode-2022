@@ -1,6 +1,6 @@
 import pytest
 
-from day04 import Elf, Pair, do_assigments_fully_overlap, set_up_pairs
+from day04 import Elf, Pair, do_assignments_fully_overlap, set_up_pairs
 
 
 @pytest.mark.parametrize(
@@ -17,7 +17,7 @@ from day04 import Elf, Pair, do_assigments_fully_overlap, set_up_pairs
 def test_do_assignments_fully_overlap(
     elf_a: set[int], elf_b: set[int], expected_outcome: bool
 ) -> None:
-    overlap = do_assigments_fully_overlap(elf_a, elf_b)
+    overlap = do_assignments_fully_overlap(elf_a, elf_b)
 
     assert overlap == expected_outcome, "You messed up calculating the overlap somehow."
 

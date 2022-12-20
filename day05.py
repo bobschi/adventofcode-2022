@@ -86,6 +86,12 @@ def execute_movement_plan(
     return stackpile
 
 
+def move_multiple_crates_at_once(
+    from_stack: Stack, to_stack: Stack, number_of_crates: int
+) -> tuple[Stack, Stack]:
+    ...
+
+
 def solve_part_one() -> None:
     stackpile, movement_plan = read_scenario("inputs/day05_input.txt")
 

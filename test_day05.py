@@ -6,6 +6,7 @@ from day05 import (
     Stack,
     Stackpile,
     execute_movement_plan,
+    move_multiple_crates_at_once,
     parse_instruction,
     read_scenario,
     get_top,
@@ -172,3 +173,31 @@ def test_execute_instruction(example_stackpile: Stackpile):
     new_stackpile = execute_movement_plan(example_stackpile, movement_plan)
 
     assert new_stackpile == expected_new_stackpile
+
+
+@pytest.mark.parametrize(
+    "from_stack,to_stack,number_of_crates,expected_new_from_stack,expected_new_to_stack",
+    [
+        (["A", "B", "C"], [], 3, [], ["A", "B", "C"]),
+        (["A", "B"], ["C", "D"], 2, [], ["A", "B", "C", "D"]),
+    ],
+)
+def test_move_multiple_crates_at_once(
+    from_stack: Stack,
+    to_stack: Stack,
+    number_of_crates: int,
+    expected_new_from_stack: Stack,
+    expected_new_to_stack: Stack,
+):
+    old_from_len, old_to_len = len(from_stack), len(to_stack)
+
+    new_from_stack, new_to_stack = move_multiple_crates_at_once(
+        from_stack, to_stack, number_of_crates
+    )
+
+    new_from_len, new_to_len = len(new_from_stack), len(new_to_stack)
+
+    assert new_from_stack == expected_new_from_stack
+    assert new_to_stack == expected_new_to_stack
+    assert new_from_len == old_from_len - number_of_crates
+    assert new_to_len == old_to_len + number_of_crates

@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from functools import singledispatch
 from pathlib import Path
 
 
@@ -90,5 +91,14 @@ def get_group_badge(group: Group) -> str:
     ).pop()
 
 
+def part_two() -> None:
+    groups = create_groups_from_rucksacks("inputs/day03_input.txt")
+    badges = map(get_group_badge, groups)
+    sum_of_priorities = sum(map(calculate_item_priority, badges))
+
+    print(sum_of_priorities)
+
+
 if __name__ == "__main__":
     part_one()
+    part_two()

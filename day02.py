@@ -49,15 +49,20 @@ def calculate_score_for_multiple_rounds(moves: Moves) -> int:
 
 def read_strategy_guide_from_file(path_to_strategy_guide: Path) -> Moves:
     opponent_moves = {"A": Sign.ROCK, "B": Sign.PAPER, "C": Sign.SCISSORS}
-    player_moves = {"X": Sign.ROCK, "Y": Sign.PAPER, "Z": Sign.SCISSORS}
+    desired_outcomes = {"X": Result.LOSS, "Y": Result.DRAW, "Z": Result.WIN}
 
     with open(path_to_strategy_guide, "r") as strategy_guide_file:
         strategy_guide = strategy_guide_file.read()
 
     moves: list[Move] = []
     for line in strategy_guide.split("\n"):
-        opponent_move, player_move = line.split(" ")
-        moves.append((opponent_moves[opponent_move], player_moves[player_move]))
+        opponent_move, desired_outcome = line.split(" ")
+
+        opponent_move = opponent_moves[opponent_move]
+        desired_outcome = desired_outcomes[desired_outcome]
+
+        player_move = calculate_required_move(opponent_move, desired_outcome)
+        moves.append((opponent_move, player_move))
 
     return tuple(moves)
 

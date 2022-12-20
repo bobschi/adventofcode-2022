@@ -1,13 +1,9 @@
 import pytest
 
-from day02 import (
-    Result,
-    Sign,
-    calculate_required_move,
-    calculate_score_for_multiple_rounds,
-    calculate_score_for_one_round,
-    read_strategy_guide_from_file,
-)
+from day02 import (Result, Sign, calculate_required_move,
+                   calculate_score_for_multiple_rounds,
+                   calculate_score_for_one_round,
+                   read_strategy_guide_from_file)
 
 
 @pytest.mark.parametrize(

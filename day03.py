@@ -31,5 +31,10 @@ def pack_into_rucksack(contents: str) -> Rucksack:
     )
 
 
-def create_rucksacks_from_packing_lists(path_to_packing_lists: Path) -> list[Rucksack]:
-    ...
+def create_rucksacks_from_packing_lists(path_to_packing_lists: Path) -> tuple[Rucksack]:
+    with open(path_to_packing_lists) as packing_lists_file:
+        packing_lists = packing_lists_file.read()
+
+    return tuple(
+        [pack_into_rucksack(packing_list) for packing_list in packing_lists.split("\n")]
+    )

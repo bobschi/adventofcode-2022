@@ -49,12 +49,19 @@ def part_one():
 
 @dataclass(frozen=True)
 class Group:
-    badge: str
     rucksacks: list[Rucksack]
 
 
 def create_groups_from_rucksacks(path_to_packing_lists: Path) -> tuple[Group]:
-    ...
+    group_size = 3
+    rucksacks = create_rucksacks_from_packing_lists(path_to_packing_lists)
+
+    return tuple(
+        [
+            Group(rucksacks=rucksacks[group : group + group_size])
+            for group in range(0, len(rucksacks), group_size)
+        ]
+    )
 
 
 if __name__ == "__main__":

@@ -21,3 +21,7 @@ def put_crate_on_top(stack: Stack, crate: Crate) -> Stack:
 
 
 def move_crate(from_stack: Stack, to_stack: Stack) -> tuple[Stack, Stack]:
+    crate_to_move, new_from_stack = get_top(from_stack)
+    new_to_stack = put_crate_on_top(to_stack, crate_to_move)
+
+    return (new_from_stack, new_to_stack)

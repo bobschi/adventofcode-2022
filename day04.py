@@ -17,10 +17,12 @@ class Pair:
     elf_b: Elf
 
 
-def do_assignments_fully_overlap(elf_a: Elf, elf_b: Elf) -> bool:
+def do_assignments_fully_overlap(pair: Pair) -> bool:
     """
     Return True if one assigment is fully contained in the other, False if not.
     """
+    elf_a, elf_b = pair.elf_a, pair.elf_b
+
     return (
         elf_a.get_assignment() <= elf_b.get_assignment()
         or elf_b.get_assignment() <= elf_a.get_assignment()

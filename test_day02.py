@@ -55,8 +55,8 @@ def test_read_strategy_guide_from_file():
         (Sign.ROCK, Result.DRAW, Sign.ROCK, 4),
         (Sign.PAPER, Result.LOSS, Sign.ROCK, 1),
         (Sign.SCISSORS, Result.WIN, Sign.ROCK, 7),
-        (Sign.SCISSORS, Result.DRAW, Sign.SCISSORS, 4),
-        (Sign.SCISSORS, Result.LOSS, Sign.PAPER, 1),
+        (Sign.SCISSORS, Result.DRAW, Sign.SCISSORS, 6),
+        (Sign.SCISSORS, Result.LOSS, Sign.PAPER, 2),
     ],
 )
 def test_calculate_required_move(

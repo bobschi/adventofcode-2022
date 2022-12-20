@@ -201,3 +201,21 @@ def test_move_multiple_crates_at_once(
     assert new_to_stack == expected_new_to_stack
     assert new_from_len == old_from_len - number_of_crates
     assert new_to_len == old_to_len + number_of_crates
+
+
+def test_execute_instruction_moving_multiple_crates_at_once(
+    example_stackpile: Stackpile,
+):
+    movement_plan = [
+        "move 1 from 2 to 1",
+        "move 3 from 1 to 3",
+        "move 2 from 2 to 1",
+        "move 1 from 1 to 2",
+    ]
+    expected_new_stackpile = [["M"], ["C"], ["D", "N", "Z", "P"]]
+
+    new_stackpile = execute_movement_plan(
+        example_stackpile, movement_plan, move_multiple_crates_at_once
+    )
+
+    assert new_stackpile == expected_new_stackpile

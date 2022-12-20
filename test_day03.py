@@ -89,18 +89,14 @@ def test_create_groups_from_input():
     path_to_packing_lists = "inputs/day03_sample.txt"
     expected_groups = (
         Group(
-            rucksacks=(
-                pack_into_rucksack("vJrwpWtwJgWrhcsFMMfFFhFp"),
-                pack_into_rucksack("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"),
-                pack_into_rucksack("PmmdzqPrVvPwwTWBwg"),
-            ),
+            elf_one=pack_into_rucksack("vJrwpWtwJgWrhcsFMMfFFhFp"),
+            elf_two=pack_into_rucksack("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"),
+            elf_three=pack_into_rucksack("PmmdzqPrVvPwwTWBwg"),
         ),
         Group(
-            rucksacks=(
-                pack_into_rucksack("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"),
-                pack_into_rucksack("ttgJtRGJQctTZtZT"),
-                pack_into_rucksack("CrZsJsPPZsGzwwsLwLmpwMDw"),
-            ),
+            elf_one=pack_into_rucksack("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"),
+            elf_two=pack_into_rucksack("ttgJtRGJQctTZtZT"),
+            elf_three=pack_into_rucksack("CrZsJsPPZsGzwwsLwLmpwMDw"),
         ),
     )
 
@@ -116,21 +112,17 @@ def test_create_groups_from_input():
     [
         (
             Group(
-                rucksacks=(
-                    pack_into_rucksack("vJrwpWtwJgWrhcsFMMfFFhFp"),
-                    pack_into_rucksack("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"),
-                    pack_into_rucksack("PmmdzqPrVvPwwTWBwg"),
-                ),
+                elf_one=pack_into_rucksack("vJrwpWtwJgWrhcsFMMfFFhFp"),
+                elf_two=pack_into_rucksack("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"),
+                elf_three=pack_into_rucksack("PmmdzqPrVvPwwTWBwg"),
             ),
             "r",
         ),
         (
             Group(
-                rucksacks=(
-                    pack_into_rucksack("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"),
-                    pack_into_rucksack("ttgJtRGJQctTZtZT"),
-                    pack_into_rucksack("CrZsJsPPZsGzwwsLwLmpwMDw"),
-                ),
+                elf_one=pack_into_rucksack("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"),
+                elf_two=pack_into_rucksack("ttgJtRGJQctTZtZT"),
+                elf_three=pack_into_rucksack("CrZsJsPPZsGzwwsLwLmpwMDw"),
             ),
             "Z",
         ),

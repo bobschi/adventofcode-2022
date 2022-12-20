@@ -49,7 +49,9 @@ def part_one():
 
 @dataclass(frozen=True)
 class Group:
-    rucksacks: list[Rucksack]
+    elf_one: Rucksack
+    elf_two: Rucksack
+    elf_three: Rucksack
 
 
 def create_groups_from_rucksacks(path_to_packing_lists: Path) -> tuple[Group]:
@@ -58,8 +60,12 @@ def create_groups_from_rucksacks(path_to_packing_lists: Path) -> tuple[Group]:
 
     return tuple(
         [
-            Group(rucksacks=rucksacks[group : group + group_size])
-            for group in range(0, len(rucksacks), group_size)
+            Group(
+                elf_one=rucksacks[group_index],
+                elf_two=rucksacks[group_index + 1],
+                elf_three=rucksacks[group_index + 2],
+            )
+            for group_index in range(0, len(rucksacks), group_size)
         ]
     )
 

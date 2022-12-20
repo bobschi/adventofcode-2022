@@ -8,7 +8,7 @@ class Elf:
     assignment_end: int
 
     def get_assignment(self) -> set[int]:
-        return set(range(self.assignment_start, self.assignment_end))
+        return set(range(self.assignment_start, self.assignment_end + 1))
 
 
 @dataclass

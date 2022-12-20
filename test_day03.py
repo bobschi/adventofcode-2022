@@ -1,4 +1,4 @@
-from day03 import pack_into_rucksack, Rucksack, find_shared_item_type
+from day03 import pack_into_rucksack, Rucksack
 import pytest
 
 
@@ -34,8 +34,8 @@ def test_pack_into_rucksack(
         ("CrZsJsPPZsGzwwsLwLmpwMDw", "s"),
     ],
 )
-def test_find_shared_item_type(contents: str, expected_shared_type: str):
+def test_shared_item_type(contents: str, expected_shared_type: str):
     packed_rucksack = pack_into_rucksack(contents)
-    shared_type = find_shared_item_type(packed_rucksack)
+    shared_type = packed_rucksack.shared_item_type
 
     assert shared_type == expected_shared_type, "You found the wrong shared type."

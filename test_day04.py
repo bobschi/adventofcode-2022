@@ -1,6 +1,6 @@
 import pytest
 
-from day04 import Elf, do_assigments_fully_overlap, Pair, set_up_pairs
+from day04 import Elf, Pair, do_assigments_fully_overlap, set_up_pairs
 
 
 @pytest.mark.parametrize(
@@ -34,4 +34,4 @@ def test_creating_pairings_from_input() -> None:
 
     generated_pairings = set_up_pairs("inputs/day04_sample.txt")
 
-    assert generated_pairings == expected_pairings, "You are getting your setup wrong."
+    assert generated_pairings == expected_pairings, "The pairings are wrong."

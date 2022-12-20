@@ -12,6 +12,7 @@ from day04 import Elf, Pair, do_assignments_fully_overlap, set_up_pairs
         (Pair(Elf(2, 8), Elf(3, 7)), True),
         (Pair(Elf(6, 6), Elf(4, 6)), True),
         (Pair(Elf(2, 6), Elf(4, 8)), False),
+        (Pair(Elf(24, 27), Elf(23, 23)), False),
     ],
 )
 def test_do_assignments_fully_overlap(pair: Pair, expected_outcome: bool) -> None:

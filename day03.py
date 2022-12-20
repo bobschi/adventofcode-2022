@@ -13,3 +13,7 @@ def pack_into_rucksack(contents: str) -> Rucksack:
         compartment_one=contents[: length // 2],
         compartment_two=contents[length // 2 :],
     )
+
+
+def find_shared_item_type(rucksack: Rucksack) -> str:
+    ...

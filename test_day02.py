@@ -39,9 +39,9 @@ def test_calculate_score_for_strategy_guide():
 def test_read_strategy_guide_from_file():
     path_to_strategy_guide = "inputs/day02_sample.txt"
     expected_moves = (
-        (Sign.ROCK, Sign.PAPER),
+        (Sign.ROCK, Sign.ROCK),
         (Sign.PAPER, Sign.ROCK),
-        (Sign.SCISSORS, Sign.SCISSORS),
+        (Sign.SCISSORS, Sign.ROCK),
     )
 
     moves = read_strategy_guide_from_file(path_to_strategy_guide)

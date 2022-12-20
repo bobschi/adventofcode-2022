@@ -1,14 +1,9 @@
-from day03 import (
-    pack_into_rucksack,
-    Rucksack,
-    create_rucksacks_from_packing_lists,
-    calculate_item_priority,
-    find_shared_item_type,
-    Group,
-    create_groups_from_rucksacks,
-    get_group_badge,
-)
 import pytest
+
+from day03 import (Group, Rucksack, calculate_item_priority,
+                   create_groups_from_rucksacks,
+                   create_rucksacks_from_packing_lists, find_shared_item_type,
+                   get_group_badge, pack_into_rucksack)
 
 
 @pytest.mark.parametrize(

@@ -30,4 +30,8 @@ def move_crate(from_stack: Stack, to_stack: Stack) -> tuple[Stack, Stack]:
 def move_crates(
     from_stack: Stack, to_stack: Stack, number_of_crates: int
 ) -> tuple[Stack, Stack]:
-    ...
+    new_from_stack, new_to_stack = from_stack, to_stack
+    for _ in range(number_of_crates):
+        new_from_stack, new_to_stack = move_crate(new_from_stack, new_to_stack)
+
+    return (new_from_stack, new_to_stack)

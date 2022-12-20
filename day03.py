@@ -71,7 +71,11 @@ def create_groups_from_rucksacks(path_to_packing_lists: Path) -> tuple[Group]:
 
 
 def get_group_badge(group: Group) -> str:
-    ...
+    return (
+        set(group.elf_one.contents)
+        & set(group.elf_two.contents)
+        & set(group.elf_three.contents)
+    ).pop()
 
 
 if __name__ == "__main__":

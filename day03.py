@@ -39,3 +39,13 @@ def create_rucksacks_from_packing_lists(path_to_packing_lists: Path) -> tuple[Ru
     return tuple(
         [pack_into_rucksack(packing_list) for packing_list in packing_lists.split("\n")]
     )
+
+
+def part_one():
+    rucksacks = create_rucksacks_from_packing_lists("inputs/day03_input.txt")
+    sum_of_priorities = sum(map(calculate_shared_item_priority, rucksacks))
+    print(sum_of_priorities)
+
+
+if __name__ == "__main__":
+    part_one()

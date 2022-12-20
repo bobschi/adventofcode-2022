@@ -1,6 +1,6 @@
 import pytest
 
-from day06 import find_first_marker
+from day06 import find_marker
 
 
 @pytest.mark.parametrize(
@@ -13,7 +13,7 @@ from day06 import find_first_marker
         ("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11),
     ),
 )
-def test_find_first_marker(datastream: str, expected_index: int):
-    index = find_first_marker(datastream)
+def test_find_marker(datastream: str, expected_index: int):
+    index = find_marker(datastream)
 
     assert index == expected_index

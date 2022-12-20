@@ -1,4 +1,4 @@
-def find_first_marker(datastream: str) -> int:
+def find_marker(datastream: str) -> int:
     """
     Return the last character index of the first group of four distinct characters.
     """
@@ -14,7 +14,7 @@ def solve_part_one() -> None:
     with open("inputs/day06.txt") as file:
         datastream = file.read()
 
-    index = find_first_marker(datastream)
+    index = find_marker(datastream)
 
     print(f"The solution for part one is {index}")
 

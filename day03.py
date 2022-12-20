@@ -8,10 +8,6 @@ class Rucksack:
     compartment_two: str
 
     @property
-    def shared_item_type(self) -> str:
-        return (set(self.compartment_one) & set(self.compartment_two)).pop()
-
-    @property
     def contents(self) -> str:
         return f"{self.compartment_one}{self.compartment_two}"
 
@@ -24,11 +20,16 @@ def pack_into_rucksack(contents: str) -> Rucksack:
     )
 
 
-def calculate_shared_item_priority(rucksack: Rucksack) -> int:
-    if rucksack.shared_item_type.isupper():
-        return ord(rucksack.shared_item_type) - 38
+def find_shared_item_type(rucksack: Rucksack) -> str:
+    return (set(rucksack.compartment_one) & set(rucksack.compartment_two)).pop()
 
-    return ord(rucksack.shared_item_type) - 96
+
+def calculate_shared_item_priority(rucksack: Rucksack) -> int:
+    shared_item_type = find_shared_item_type(rucksack)
+    if shared_item_type.isupper():
+        return ord(shared_item_type) - 38
+
+    return ord(shared_item_type) - 96
 
 
 def create_rucksacks_from_packing_lists(path_to_packing_lists: Path) -> tuple[Rucksack]:

@@ -1,7 +1,15 @@
 import pytest
 from pytest_lazyfixture import lazy_fixture
 
-from day05 import Crate, Stack, get_top, move_crate, peek_top, put_crate_on_top
+from day05 import (
+    Crate,
+    Stack,
+    get_top,
+    move_crate,
+    move_crates,
+    peek_top,
+    put_crate_on_top,
+)
 
 
 @pytest.fixture
@@ -96,3 +104,23 @@ def test_move_crate(
     assert new_size_a - old_size_a + 1 == new_size_b - old_size_b - 1
     assert new_top_a == expected_new_top_a
     assert new_top_b == expected_new_top_b
+
+
+@pytest.mark.parametrize(
+    "from_stack,to_stack,number_of_crates,expected_new_from_stack,expected_new_to_stack",
+    [
+        (["A", "B", "C"], [], 3, [], ["C", "B", "A"]),
+        (["A", "B"], ["C", "D"], 1, ["B"], ["A", "C", "D"]),
+    ],
+)
+def test_move_multiple_crates(
+    from_stack: Stack,
+    to_stack: Stack,
+    number_of_crates: int,
+    expected_new_from_stack: Stack,
+    expected_new_to_stack: Stack,
+):
+    new_from_stack, new_to_stack = move_crates(from_stack, to_stack, number_of_crates)
+
+    assert new_from_stack == expected_new_from_stack
+    assert new_to_stack == expected_new_to_stack

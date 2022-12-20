@@ -2,7 +2,7 @@ from day03 import (
     pack_into_rucksack,
     Rucksack,
     create_rucksacks_from_packing_lists,
-    calculate_shared_item_priority,
+    calculate_item_priority,
     find_shared_item_type,
     Group,
     create_groups_from_rucksacks,
@@ -56,7 +56,7 @@ def test_find_shared_item_type(contents: str, expected_shared_type: str):
 )
 def test_calculate_shared_item_priority(contents: str, expected_priority: int):
     packed_rucksack = pack_into_rucksack(contents)
-    calculated_priority = calculate_shared_item_priority(packed_rucksack)
+    calculated_priority = calculate_item_priority(packed_rucksack)
 
     assert calculated_priority == expected_priority, (
         "Either you are finding the wrong shared item -- Are other tests failing? -- or"

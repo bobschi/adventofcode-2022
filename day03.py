@@ -24,12 +24,24 @@ def find_shared_item_type(rucksack: Rucksack) -> str:
     return (set(rucksack.compartment_one) & set(rucksack.compartment_two)).pop()
 
 
-def calculate_shared_item_priority(rucksack: Rucksack) -> int:
-    shared_item_type = find_shared_item_type(rucksack)
-    if shared_item_type.isupper():
-        return ord(shared_item_type) - 38
+@singledispatch
+def calculate_item_priority(item) -> int:
+    pass
 
-    return ord(shared_item_type) - 96
+
+@calculate_item_priority.register
+def _(item: Rucksack) -> int:
+    shared_item_type = find_shared_item_type(item)
+
+    return calculate_item_priority(shared_item_type)
+
+
+@calculate_item_priority.register
+def _(item: str) -> int:
+    if item.isupper():
+        return ord(item) - 38
+
+    return ord(item) - 96
 
 
 def create_rucksacks_from_packing_lists(path_to_packing_lists: Path) -> tuple[Rucksack]:
@@ -41,9 +53,9 @@ def create_rucksacks_from_packing_lists(path_to_packing_lists: Path) -> tuple[Ru
     )
 
 
-def part_one():
+def part_one() -> None:
     rucksacks = create_rucksacks_from_packing_lists("inputs/day03_input.txt")
-    sum_of_priorities = sum(map(calculate_shared_item_priority, rucksacks))
+    sum_of_priorities = sum(map(calculate_item_priority, rucksacks))
     print(sum_of_priorities)
 
 

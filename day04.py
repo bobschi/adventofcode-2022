@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import Path
 
 
 @dataclass
@@ -24,3 +25,10 @@ def do_assigments_fully_overlap(elf_a: Elf, elf_b: Elf) -> bool:
         elf_a.get_assignment() <= elf_b.get_assignment()
         or elf_b.get_assignment() <= elf_a.get_assignment()
     )
+
+
+def set_up_pairs(path_to_pair_list: Path) -> tuple[Pair]:
+    """
+    Return a list of pairs of elves generated from a correctly formatted input file.
+    """
+    ...

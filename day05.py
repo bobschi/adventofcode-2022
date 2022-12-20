@@ -73,13 +73,15 @@ def parse_instruction(instruction: str) -> tuple[int, int, int]:
 
 
 def execute_movement_plan(
-    stackpile: Stackpile, movement_plan: MovementPlan
+    stackpile: Stackpile, movement_plan: MovementPlan, movement_func: callable
 ) -> Stackpile:
     for instruction in movement_plan:
         crates_to_move, from_stack_id, to_stack_id = parse_instruction(instruction)
         from_stack, to_stack = stackpile[from_stack_id], stackpile[to_stack_id]
 
-        new_from_stack, new_to_stack = move_crates(from_stack, to_stack, crates_to_move)
+        new_from_stack, new_to_stack = movement_func(
+            from_stack, to_stack, crates_to_move
+        )
 
         stackpile[from_stack_id], stackpile[to_stack_id] = new_from_stack, new_to_stack
 

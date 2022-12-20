@@ -170,7 +170,7 @@ def test_execute_instruction(example_stackpile: Stackpile):
     ]
     expected_new_stackpile = [["C"], ["M"], ["Z", "N", "D", "P"]]
 
-    new_stackpile = execute_movement_plan(example_stackpile, movement_plan)
+    new_stackpile = execute_movement_plan(example_stackpile, movement_plan, move_crates)
 
     assert new_stackpile == expected_new_stackpile
 

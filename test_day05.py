@@ -60,6 +60,20 @@ def test_get_top(
 
 
 @pytest.mark.parametrize(
+    "stack,crate,expected_stack",
+    [
+        (["A", "B", "C"], "D", ["D", "A", "B", "C"]),
+        (["N", "Z"], "X", ["X", "N", "Z"]),
+        (["D", "C", "M"], "R", ["R", "D", "C", "M"]),
+    ],
+)
+def test_put_crate_on_top(stack: Stack, crate: Crate, expected_stack: Stack):
+    new_stack = put_crate_on_top(stack, crate)
+
+    assert new_stack == expected_stack
+
+
+@pytest.mark.parametrize(
     "stack_a,stack_b,expected_new_top_a,expected_new_top_b",
     [
         (lazy_fixture("stack_c"), lazy_fixture("stack_a"), "", "P"),

@@ -1,7 +1,7 @@
 import pytest
 from pytest_lazyfixture import lazy_fixture
 
-from day05 import Crate, Stack, get_top, peek_top
+from day05 import Crate, Stack, get_top, move_crate, peek_top
 
 
 @pytest.fixture
@@ -57,3 +57,29 @@ def test_get_top(
     assert old_top == expected_old_top, "You took off the wrong thing."
     assert new_stack == expected_new_stack, "Our new stack looks weird."
     assert new_top == expected_new_top, "You've got the wrong top on there, mate."
+
+
+@pytest.mark.parametrize(
+    "stack_a,stack_b,expected_new_top_a,expected_new_top_b",
+    [
+        (lazy_fixture("stack_c"), lazy_fixture("stack_a"), "", "P"),
+        (lazy_fixture("stack_a"), lazy_fixture("stack_b"), "Z", "N"),
+    ],
+)
+def test_move_crate(
+    stack_a: Stack,
+    stack_b: Stack,
+    expected_new_top_a: Crate,
+    expected_new_top_b: Crate,
+):
+    old_size_a, old_size_b = len(stack_a), len(stack_b)
+
+    new_stack_a, new_stack_b = move_crate(stack_a, stack_b, 1)
+
+    new_top_a, new_top_b = peek_top(new_stack_a), peek_top(new_stack_b)
+    new_size_a, new_size_b = len(new_stack_a), len(new_stack_b)
+
+    assert new_size_a == old_size_a - 1
+    assert new_size_b == old_size_b + 1
+    assert new_top_a == expected_new_top_a
+    assert new_top_b == expected_new_top_b

@@ -12,7 +12,10 @@ class Rucksack:
 
     @property
     def shared_item_priority(self) -> int:
-        ...
+        if self.shared_item_type.isupper():
+            return ord(self.shared_item_type) - 38
+
+        return ord(self.shared_item_type) - 96
 
 
 def pack_into_rucksack(contents: str) -> Rucksack:

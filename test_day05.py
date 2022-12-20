@@ -4,6 +4,7 @@ from pytest_lazyfixture import lazy_fixture
 from day05 import (
     Crate,
     Stack,
+    Stackpile,
     read_scenario,
     get_top,
     move_crate,
@@ -26,6 +27,11 @@ def stack_b() -> Stack:
 @pytest.fixture
 def stack_c() -> Stack:
     return ["P"]
+
+
+@pytest.fixture
+def example_stackpile(stack_a, stack_b, stack_c) -> Stackpile:
+    return [stack_a, stack_b, stack_c]
 
 
 @pytest.mark.parametrize(

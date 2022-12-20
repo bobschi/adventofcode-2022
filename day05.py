@@ -89,7 +89,11 @@ def execute_movement_plan(
 def move_multiple_crates_at_once(
     from_stack: Stack, to_stack: Stack, number_of_crates: int
 ) -> tuple[Stack, Stack]:
-    ...
+    crates_to_move = from_stack[:number_of_crates]
+    new_from_stack = from_stack[number_of_crates:]
+    new_to_stack = crates_to_move + to_stack
+
+    return (new_from_stack, new_to_stack)
 
 
 def solve_part_one() -> None:

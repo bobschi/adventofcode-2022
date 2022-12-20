@@ -14,6 +14,6 @@ from day06 import find_marker
     ),
 )
 def test_find_marker(datastream: str, expected_index: int):
-    index = find_marker(datastream)
+    index = find_marker(4, datastream)
 
     assert index == expected_index

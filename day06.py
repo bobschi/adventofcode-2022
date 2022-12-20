@@ -1,20 +1,27 @@
-def find_marker(datastream: str) -> int:
+from functools import partial
+
+
+def find_marker(marker_size: int, datastream: str) -> int:
     """
     Return the last character index of the first group of four distinct characters.
     """
-    for i in range(len(datastream) - 3):
-        current_sequence = set(datastream[i : i + 4])
-        if len(current_sequence) == 4:
-            return i + 4
+    for i in range(len(datastream) - marker_size - 1):
+        current_sequence = set(datastream[i : i + marker_size])
+        if len(current_sequence) == marker_size:
+            return i + marker_size
 
     return -1
+
+
+find_start_of_packet_marker = partial(find_marker, 4)
+find_start_of_message_marker = partial(find_marker, 14)
 
 
 def solve_part_one() -> None:
     with open("inputs/day06.txt") as file:
         datastream = file.read()
 
-    index = find_marker(datastream)
+    index = find_start_of_packet_marker(datastream)
 
     print(f"The solution for part one is {index}")
 

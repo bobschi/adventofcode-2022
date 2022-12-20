@@ -49,6 +49,13 @@ def set_up_pairs(path_to_pair_list: Path) -> tuple[Pair]:
     return tuple(pairs)
 
 
+def do_assigments_overlap(pair: Pair) -> bool:
+    """
+    Return True if assigned ranges overlap at least partially.
+    """
+    ...
+
+
 def solve_part_one() -> None:
     pairs = set_up_pairs("inputs/day04_input.txt")
     total_overlaps = len(tuple(filter(do_assignments_fully_overlap, pairs)))

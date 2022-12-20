@@ -4,6 +4,7 @@ from pytest_lazyfixture import lazy_fixture
 from day05 import (
     Crate,
     Stack,
+    read_scenario,
     get_top,
     move_crate,
     move_crates,
@@ -124,3 +125,10 @@ def test_move_multiple_crates(
 
     assert new_from_stack == expected_new_from_stack
     assert new_to_stack == expected_new_to_stack
+
+
+def test_read_scenario():
+    stackpile, movement_plan = read_scenario("inputs/day05_sample.txt")
+
+    assert len(stackpile) == 3
+    assert len(movement_plan) == 4

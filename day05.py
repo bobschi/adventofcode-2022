@@ -1,5 +1,9 @@
+from pathlib import Path
+
 Crate = str
 Stack = list[Crate]
+Stackpile = list[Stack]
+MovementPlan = list[str]
 
 
 def peek_top(stack: Stack) -> Crate:
@@ -35,3 +39,9 @@ def move_crates(
         new_from_stack, new_to_stack = move_crate(new_from_stack, new_to_stack)
 
     return (new_from_stack, new_to_stack)
+
+
+def read_scenario(
+    path_to_scenario: Path,
+) -> tuple[Stackpile, MovementPlan]:
+    ...

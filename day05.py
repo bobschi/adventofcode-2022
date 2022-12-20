@@ -84,3 +84,18 @@ def execute_movement_plan(
         stackpile[from_stack_id], stackpile[to_stack_id] = new_from_stack, new_to_stack
 
     return stackpile
+
+
+def solve_part_one() -> None:
+    stackpile, movement_plan = read_scenario("inputs/day05_input.txt")
+
+    final_stackpile = execute_movement_plan(stackpile, movement_plan)
+
+    tops = [peek_top(stack) for stack in stackpile]
+    message = "".join(tops)
+
+    print(f"The solution for part one is {message}")
+
+
+if __name__ == "__main__":
+    solve_part_one()

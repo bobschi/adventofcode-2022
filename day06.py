@@ -8,3 +8,16 @@ def find_first_marker(datastream: str) -> int:
             return i + 4
 
     return -1
+
+
+def solve_part_one() -> None:
+    with open("inputs/day06.txt") as file:
+        datastream = file.read()
+
+    index = find_first_marker(datastream)
+
+    print(f"The solution for part one is {index}")
+
+
+if __name__ == "__main__":
+    solve_part_one()

@@ -47,3 +47,14 @@ def set_up_pairs(path_to_pair_list: Path) -> tuple[Pair]:
         pairs.append(Pair(create_elf(elf_a_range), create_elf(elf_b_range)))
 
     return tuple(pairs)
+
+
+def solve_part_one() -> None:
+    pairs = set_up_pairs("inputs/day04_input.txt")
+    total_overlaps = len(tuple(filter(do_assignments_fully_overlap, pairs)))
+
+    print(f"The solution for part one is {total_overlaps}")
+
+
+if __name__ == "__main__":
+    solve_part_one()

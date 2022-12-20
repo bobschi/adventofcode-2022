@@ -21,12 +21,12 @@ def do_assignments_fully_overlap(pair: Pair) -> bool:
     """
     Return True if one assigment is fully contained in the other, False if not.
     """
-    elf_a, elf_b = pair.elf_a, pair.elf_b
-
-    return (
-        elf_a.get_assignment() <= elf_b.get_assignment()
-        or elf_b.get_assignment() <= elf_a.get_assignment()
+    elf_a_assignment, elf_b_assignment = (
+        pair.elf_a.get_assignment(),
+        pair.elf_b.get_assignment(),
     )
+
+    return elf_a_assignment <= elf_b_assignment or elf_b_assignment <= elf_a_assignment
 
 
 def set_up_pairs(path_to_pair_list: Path) -> tuple[Pair]:

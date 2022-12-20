@@ -1,6 +1,6 @@
 import pytest
 
-from day06 import find_start_of_packet_marker, find_start_of_message_marker
+from day06 import find_start_of_message_marker, find_start_of_packet_marker
 
 
 @pytest.mark.parametrize(

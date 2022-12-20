@@ -64,5 +64,9 @@ def create_groups_from_rucksacks(path_to_packing_lists: Path) -> tuple[Group]:
     )
 
 
+def get_group_badge(group: Group) -> str:
+    ...
+
+
 if __name__ == "__main__":
     part_one()

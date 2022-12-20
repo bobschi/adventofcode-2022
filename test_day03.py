@@ -6,6 +6,7 @@ from day03 import (
     find_shared_item_type,
     Group,
     create_groups_from_rucksacks,
+    get_group_badge,
 )
 import pytest
 
@@ -108,3 +109,34 @@ def test_create_groups_from_input():
     assert len(groups) == len(
         expected_groups
     ), "You are either making too many or too few groups."
+
+
+@pytest.mark.parametrize(
+    "group,expected_badge",
+    [
+        (
+            Group(
+                rucksacks=(
+                    pack_into_rucksack("vJrwpWtwJgWrhcsFMMfFFhFp"),
+                    pack_into_rucksack("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"),
+                    pack_into_rucksack("PmmdzqPrVvPwwTWBwg"),
+                ),
+            ),
+            "r",
+        ),
+        (
+            Group(
+                rucksacks=(
+                    pack_into_rucksack("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"),
+                    pack_into_rucksack("ttgJtRGJQctTZtZT"),
+                    pack_into_rucksack("CrZsJsPPZsGzwwsLwLmpwMDw"),
+                ),
+            ),
+            "Z",
+        ),
+    ],
+)
+def test_get_group_badge(group: Group, expected_badge: str):
+    badge = get_group_badge(group)
+
+    assert badge == expected_badge, "You messed up calculating the group badge somehow."

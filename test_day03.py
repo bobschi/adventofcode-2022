@@ -1,4 +1,4 @@
-from day03 import pack_into_rucksack, Rucksack
+from day03 import pack_into_rucksack, Rucksack, create_rucksacks_from_packing_lists
 import pytest
 
 
@@ -52,3 +52,24 @@ def test_shared_item_priority(contents: str, expected_priority: int):
         "Either you are finding the wrong shared item -- Are other tests failing? -- or"
         "you are assigning the wrong priority."
     )
+
+
+def test_create_rucksacks_from_input():
+    path_to_packing_lists = "inputs/day03_sample.txt"
+    expected_rucksacks = (
+        pack_into_rucksack("vJrwpWtwJgWrhcsFMMfFFhFp"),
+        pack_into_rucksack("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"),
+        pack_into_rucksack("PmmdzqPrVvPwwTWBwg"),
+        pack_into_rucksack("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"),
+        pack_into_rucksack("ttgJtRGJQctTZtZT"),
+        pack_into_rucksack("CrZsJsPPZsGzwwsLwLmpwMDw"),
+    )
+
+    rucksacks = create_rucksacks_from_packing_lists(path_to_packing_lists)
+
+    assert len(rucksacks) == len(
+        expected_rucksacks
+    ), "You are either packing too many or too few rucksacks."
+    assert (
+        expected_rucksacks == rucksacks
+    ), "Your rucksacks don't hold the expected contents."

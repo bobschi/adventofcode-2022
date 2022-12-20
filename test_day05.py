@@ -5,6 +5,7 @@ from day05 import (
     Crate,
     Stack,
     Stackpile,
+    execute_movement_plan,
     read_scenario,
     get_top,
     move_crate,
@@ -138,3 +139,17 @@ def test_read_scenario():
 
     assert len(stackpile) == 3
     assert len(movement_plan) == 4
+
+
+def test_execute_instruction(example_stackpile: Stackpile):
+    movement_plan = [
+        "move 1 from 2 to 1",
+        "move 3 from 1 to 3",
+        "move 2 from 2 to 1",
+        "move 1 from 1 to 2",
+    ]
+    expected_new_stackpile = [["C"], ["M"], ["Z", "N", "D", "P"]]
+
+    new_stackpile = execute_movement_plan(example_stackpile, movement_plan)
+
+    assert new_stackpile == expected_new_stackpile

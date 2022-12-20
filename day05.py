@@ -63,3 +63,9 @@ def read_scenario(
     movement_plan = movement_plan.splitlines()
 
     return (stackpile, movement_plan)
+
+
+def execute_movement_plan(
+    stackpile: Stackpile, movement_plan: MovementPlan
+) -> Stackpile:
+    ...

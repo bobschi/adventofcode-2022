@@ -6,6 +6,7 @@ from day05 import (
     Stack,
     Stackpile,
     execute_movement_plan,
+    parse_instruction,
     read_scenario,
     get_top,
     move_crate,
@@ -139,6 +140,24 @@ def test_read_scenario():
 
     assert len(stackpile) == 3
     assert len(movement_plan) == 4
+
+
+@pytest.mark.parametrize(
+    "instruction,expected_instructions",
+    (
+        ("move 1 from 2 to 1", (1, 1, 0)),
+        ("move 3 from 1 to 3", (3, 0, 2)),
+        ("move 2 from 2 to 1", (2, 1, 0)),
+        ("move 1 from 1 to 2", (1, 0, 1)),
+    ),
+)
+def test_parse_instruction(
+    instruction: str,
+    expected_instructions,
+):
+    instructions = parse_instruction(instruction)
+
+    assert instructions == expected_instructions
 
 
 def test_execute_instruction(example_stackpile: Stackpile):

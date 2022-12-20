@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 
 Crate = str
 Stack = list[Crate]
@@ -63,6 +64,12 @@ def read_scenario(
     movement_plan = movement_plan.splitlines()
 
     return (stackpile, movement_plan)
+
+
+def parse_instruction(instruction: str) -> tuple[int, int, int]:
+    crates_to_move, from_stack, to_stack = map(int, re.findall(r"\d+", instruction))
+
+    return (crates_to_move, from_stack - 1, to_stack - 1)
 
 
 def execute_movement_plan(

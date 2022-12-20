@@ -44,4 +44,22 @@ def move_crates(
 def read_scenario(
     path_to_scenario: Path,
 ) -> tuple[Stackpile, MovementPlan]:
-    ...
+    with open(path_to_scenario) as scenario_file:
+        scenario = scenario_file.read()
+
+    initial_stack_state, movement_plan = scenario.split("\n\n")
+    *stacks, number_of_stacks = initial_stack_state.splitlines()
+    stacks.reverse()
+    number_of_stacks = len(number_of_stacks.split())
+
+    stackpile = Stackpile([[] for _ in range(number_of_stacks)])
+    for level in stacks:
+        for stack_id, i in enumerate(range(1, len(stacks[0]), 4)):
+            if level[i].strip() != "":
+                current_stack = stackpile[stack_id]
+                crate = level[i]
+                stackpile[stack_id] = put_crate_on_top(current_stack, crate)
+
+    movement_plan = movement_plan.splitlines()
+
+    return (stackpile, movement_plan)

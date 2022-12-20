@@ -63,7 +63,9 @@ def read_strategy_guide_from_file(path_to_strategy_guide: Path) -> Moves:
 
 
 def calculate_required_move(opponent_move: Sign, desired_outcome: Result) -> Sign:
-    ...
+    for move, result in OUTCOMES[opponent_move].items():
+        if result == desired_outcome:
+            return move
 
 
 def solve_day_two(

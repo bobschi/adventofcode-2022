@@ -1,7 +1,7 @@
 from functools import partial
 import pytest
 
-from day08 import Direction, Map, visible_trees_in_line
+from day08 import Direction, Map, read_map, visible_trees_in_line
 
 
 @pytest.fixture
@@ -19,6 +19,17 @@ def ring_of_trees() -> Map:
         [1, 2, 1],
         [2, 0, 2],
         [1, 2, 3],
+    ]
+
+
+@pytest.fixture
+def sample_map() -> Map:
+    return [
+        [3, 0, 3, 7, 3],
+        [2, 5, 5, 1, 2],
+        [6, 5, 3, 3, 2],
+        [3, 3, 5, 4, 9],
+        [3, 5, 3, 9, 0],
     ]
 
 
@@ -86,3 +97,9 @@ def test_number_of_visible_trees_ring_of_trees_up(ring_of_trees) -> None:
     assert visible_up(0) == 2
     assert visible_up(1) == 1
     assert visible_up(2) == 1
+
+
+def test_read_map(sample_map) -> None:
+    map = read_map("inputs/day08_sample.txt")
+
+    assert map == sample_map

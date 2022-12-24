@@ -1,4 +1,5 @@
 import enum
+from pathlib import Path
 
 
 class Direction(enum.Enum):
@@ -36,3 +37,10 @@ def visible_trees_in_line(map: Map, direction: Direction, line: int) -> int:
         count = count + 1
 
     return count
+
+
+def read_map(path_to_map: Path) -> Map:
+    with open(path_to_map, "r") as map_file:
+        map_contents = map_file.readlines()
+
+    return [[int(height) for height in list(line.strip())] for line in map_contents]

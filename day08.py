@@ -30,7 +30,12 @@ def visible_trees_from_outside(map: Map) -> Map:
                 all([tree < height for tree in line[:column_index]]),
                 all([tree < height for tree in line[column_index + 1 :]]),
                 all([map[i][column_index] < height for i in range(line_index)]),
-                all([map[i][column_index] < height for i in range(line_index, lines)]),
+                all(
+                    [
+                        map[i][column_index] < height
+                        for i in range(line_index + 1, lines)
+                    ]
+                ),
             ]
 
             if any(tests):

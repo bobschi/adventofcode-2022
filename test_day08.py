@@ -1,11 +1,7 @@
 from functools import partial
 import pytest
 
-from day08 import (
-    Map,
-    read_map,
-    visible_trees_from_outside,
-)
+from day08 import Map, number_of_visible_trees_from_outside, read_map
 
 
 @pytest.fixture
@@ -24,4 +20,4 @@ def test_read_map(sample_map) -> None:
 
 
 def test_solve_part_one(sample_map) -> None:
-    assert visible_trees_from_outside(sample_map) == 21
+    assert number_of_visible_trees_from_outside(sample_map) == 21

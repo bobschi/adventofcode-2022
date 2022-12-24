@@ -1,20 +1,15 @@
+from functools import partial
 import pytest
 
-from pytest_lazyfixture import lazy_fixture
-from day08 import (
-    Direction,
-    Map,
-    number_of_visible_trees_in_column,
-    number_of_visible_trees_in_row,
-)
+from day08 import Direction, Map, visible_trees_in_line
 
 
 @pytest.fixture
-def one_tree_center() -> Map:
+def asymmetric() -> Map:
     return [
-        [0, 0, 0],
-        [0, 1, 0],
-        [0, 0, 0],
+        [0, 0, 0, 1],
+        [0, 1, 0, 1],
+        [0, 0, 0, 1],
     ]
 
 
@@ -27,64 +22,67 @@ def ring_of_trees() -> Map:
     ]
 
 
-@pytest.fixture
-def sample_map() -> Map:
-    return [
-        [3, 0, 3, 7, 3],
-        [2, 5, 5, 1, 2],
-        [6, 5, 3, 3, 2],
-        [3, 3, 5, 4, 9],
-        [3, 5, 3, 9, 0],
-    ]
+def test_number_of_visible_trees_asymmetric_map_left(asymmetric) -> None:
+    visible_left = partial(visible_trees_in_line, asymmetric, Direction.LEFT)
+
+    assert visible_left(0) == 1
+    assert visible_left(1) == 1
+    assert visible_left(2) == 1
 
 
-@pytest.mark.parametrize(
-    "map,row,expected_number_of_trees",
-    [
-        [lazy_fixture("one_tree_center"), 0, (0, 0)],
-        [lazy_fixture("one_tree_center"), 1, (1, 1)],
-        [lazy_fixture("one_tree_center"), 2, (0, 0)],
-        [lazy_fixture("ring_of_trees"), 0, (2, 2)],
-        [lazy_fixture("ring_of_trees"), 1, (1, 1)],
-        [lazy_fixture("ring_of_trees"), 2, (3, 1)],
-        [lazy_fixture("sample_map"), 0, (2, 2)],
-        [lazy_fixture("sample_map"), 1, (2, 2)],
-        [lazy_fixture("sample_map"), 2, (1, 4)],
-        [lazy_fixture("sample_map"), 3, (3, 1)],
-        [lazy_fixture("sample_map"), 4, (3, 1)],
-    ],
-)
-def test_number_of_visible_trees_in_row(
-    map: Map, row: int, expected_number_of_trees: tuple[int, int]
-) -> None:
-    visible_left = number_of_visible_trees_in_row(row, Direction.LEFT, map)
-    visible_right = number_of_visible_trees_in_row(row, Direction.RIGHT, map)
+def test_number_of_visible_trees_ring_of_trees_left(ring_of_trees) -> None:
+    visible_left = partial(visible_trees_in_line, ring_of_trees, Direction.LEFT)
 
-    assert visible_left == expected_number_of_trees[Direction.LEFT]
-    assert visible_right == expected_number_of_trees[Direction.RIGHT]
+    assert visible_left(0) == 2
+    assert visible_left(1) == 1
+    assert visible_left(2) == 3
 
 
-@pytest.mark.parametrize(
-    "map,column,expected_number_of_trees",
-    [
-        [lazy_fixture("one_tree_center"), 0, (0, 0)],
-        [lazy_fixture("one_tree_center"), 1, (1, 1)],
-        [lazy_fixture("one_tree_center"), 2, (0, 0)],
-        [lazy_fixture("ring_of_trees"), 0, (2, 2)],
-        [lazy_fixture("ring_of_trees"), 1, (1, 1)],
-        [lazy_fixture("ring_of_trees"), 2, (3, 1)],
-        [lazy_fixture("sample_map"), 0, (2, 2)],
-        [lazy_fixture("sample_map"), 1, (1, 1)],
-        [lazy_fixture("sample_map"), 2, (2, 2)],
-        [lazy_fixture("sample_map"), 3, (2, 1)],
-        [lazy_fixture("sample_map"), 4, (2, 1)],
-    ],
-)
-def test_number_of_visible_trees_in_colum(
-    map: Map, column: int, expected_number_of_trees: tuple[int, int]
-) -> None:
-    visible_down = number_of_visible_trees_in_column(column, Direction.DOWN, map)
-    visible_up = number_of_visible_trees_in_column(column, Direction.UP, map)
+def test_number_of_visible_trees_asymmetric_map_right(asymmetric) -> None:
+    visible_right = partial(visible_trees_in_line, asymmetric, Direction.RIGHT)
 
-    assert visible_down == expected_number_of_trees[Direction.DOWN]
-    assert visible_up == expected_number_of_trees[Direction.UP]
+    assert visible_right(0) == 1
+    assert visible_right(1) == 1
+    assert visible_right(2) == 1
+
+
+def test_number_of_visible_trees_ring_of_trees_right(ring_of_trees) -> None:
+    visible_right = partial(visible_trees_in_line, ring_of_trees, Direction.RIGHT)
+
+    assert visible_right(0) == 2
+    assert visible_right(1) == 1
+    assert visible_right(2) == 1
+
+
+def test_number_of_visible_trees_asymmetric_map_down(asymmetric) -> None:
+    visible_down = partial(visible_trees_in_line, asymmetric, Direction.DOWN)
+
+    assert visible_down(0) == 0
+    assert visible_down(1) == 1
+    assert visible_down(2) == 0
+    assert visible_down(3) == 1
+
+
+def test_number_of_visible_trees_ring_of_trees_down(ring_of_trees) -> None:
+    visible_down = partial(visible_trees_in_line, ring_of_trees, Direction.DOWN)
+
+    assert visible_down(0) == 2
+    assert visible_down(1) == 1
+    assert visible_down(2) == 3
+
+
+def test_number_of_visible_trees_asymmetric_map_up(asymmetric) -> None:
+    visible_up = partial(visible_trees_in_line, asymmetric, Direction.UP)
+
+    assert visible_up(0) == 0
+    assert visible_up(1) == 1
+    assert visible_up(2) == 0
+    assert visible_up(3) == 1
+
+
+def test_number_of_visible_trees_ring_of_trees_up(ring_of_trees) -> None:
+    visible_up = partial(visible_trees_in_line, ring_of_trees, Direction.UP)
+
+    assert visible_up(0) == 2
+    assert visible_up(1) == 1
+    assert visible_up(2) == 1

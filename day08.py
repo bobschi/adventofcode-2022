@@ -17,36 +17,13 @@ def number_of_trees_visible_from_direction(
     ...
 
 
-def is_tree(tree_height: int) -> bool:
-    return tree_height >= 1
-
-
 def number_of_visible_trees_in_row(row: int, direction: Direction, map: Map) -> int:
     row_looked_at = map[row]
 
     if direction == Direction.RIGHT:
         row_looked_at.reverse()
 
-    def are_neighbors_smaller(position: int) -> bool:
-        height_at_position = row_looked_at[position]
-
-        for tree in row_looked_at[:position]:
-            if tree >= height_at_position:
-                return False
-
-        return True
-
-    count: int = 0
-    for position, tree in enumerate(row_looked_at):
-        if not is_tree(tree):
-            continue
-
-        if not are_neighbors_smaller(position):
-            continue
-
-        count = count + 1
-
-    return count
+    return visible_trees_in_line_of_tress(row_looked_at)
 
 
 def number_of_visible_trees_in_column(
@@ -57,4 +34,27 @@ def number_of_visible_trees_in_column(
     if direction == Direction.UP:
         column_looked_at.reverse()
 
-    ...
+    return visible_trees_in_line_of_tress(column_looked_at)
+
+
+def visible_trees_in_line_of_tress(line_of_trees: list[int]) -> int:
+    def are_neighbors_smaller(position: int) -> bool:
+        height_at_position = line_of_trees[position]
+
+        for tree in line_of_trees[:position]:
+            if tree >= height_at_position:
+                return False
+
+        return True
+
+    count = 0
+    for position, height in enumerate(line_of_trees):
+        if height == 0:
+            continue
+
+        if not are_neighbors_smaller(position):
+            continue
+
+        count = count + 1
+
+    return count

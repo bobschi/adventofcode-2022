@@ -74,17 +74,17 @@ def test_number_of_visible_trees_in_row(
         [lazy_fixture("ring_of_trees"), 1, (1, 1)],
         [lazy_fixture("ring_of_trees"), 2, (3, 1)],
         [lazy_fixture("sample_map"), 0, (2, 2)],
-        [lazy_fixture("sample_map"), 1, (2, 2)],
-        [lazy_fixture("sample_map"), 2, (1, 4)],
-        [lazy_fixture("sample_map"), 3, (3, 1)],
-        [lazy_fixture("sample_map"), 4, (3, 1)],
+        [lazy_fixture("sample_map"), 1, (1, 1)],
+        [lazy_fixture("sample_map"), 2, (2, 2)],
+        [lazy_fixture("sample_map"), 3, (2, 1)],
+        [lazy_fixture("sample_map"), 4, (2, 1)],
     ],
 )
 def test_number_of_visible_trees_in_colum(
     map: Map, column: int, expected_number_of_trees: tuple[int, int]
 ) -> None:
     visible_down = number_of_visible_trees_in_column(column, Direction.DOWN, map)
-    visible_down = number_of_visible_trees_in_column(column, Direction.UP, map)
+    visible_up = number_of_visible_trees_in_column(column, Direction.UP, map)
 
     assert visible_down == expected_number_of_trees[Direction.DOWN]
-    assert visible_down == expected_number_of_trees[Direction.UP]
+    assert visible_up == expected_number_of_trees[Direction.UP]

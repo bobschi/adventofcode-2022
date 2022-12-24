@@ -16,6 +16,9 @@ def number_of_trees_visible_from_direction(
 ) -> int:
     ...
 
+def is_tree(tree_height: int) -> bool:
+    return tree_height >= 1
+
 
 def number_of_visible_trees_in_row(row: int, direction: Direction, map: Map) -> int:
     row_looked_at = map[row]
@@ -23,8 +26,6 @@ def number_of_visible_trees_in_row(row: int, direction: Direction, map: Map) -> 
     if direction == Direction.RIGHT:
         row_looked_at.reverse()
 
-    def is_tree(tree_height: int) -> bool:
-        return tree_height >= 1
 
     def are_neighbors_smaller(position: int) -> bool:
         height_at_position = row_looked_at[position]

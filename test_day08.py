@@ -1,7 +1,12 @@
 import pytest
 
 from pytest_lazyfixture import lazy_fixture
-from day08 import Direction, Map, number_of_visible_trees_in_row
+from day08 import (
+    Direction,
+    Map,
+    number_of_visible_trees_in_column,
+    number_of_visible_trees_in_row,
+)
 
 
 @pytest.fixture
@@ -52,8 +57,34 @@ def sample_map() -> Map:
 def test_number_of_visible_trees_in_row(
     map: Map, row: int, expected_number_of_trees: tuple[int, int]
 ) -> None:
-    visible_from_left = number_of_visible_trees_in_row(row, Direction.LEFT, map)
-    visible_from_right = number_of_visible_trees_in_row(row, Direction.RIGHT, map)
+    visible_left = number_of_visible_trees_in_row(row, Direction.LEFT, map)
+    visible_right = number_of_visible_trees_in_row(row, Direction.RIGHT, map)
 
-    assert visible_from_left == expected_number_of_trees[Direction.LEFT]
-    assert visible_from_right == expected_number_of_trees[Direction.RIGHT]
+    assert visible_left == expected_number_of_trees[Direction.LEFT]
+    assert visible_right == expected_number_of_trees[Direction.RIGHT]
+
+
+@pytest.mark.parametrize(
+    "map,column,expected_number_of_trees",
+    [
+        [lazy_fixture("one_tree_center"), 0, (0, 0)],
+        [lazy_fixture("one_tree_center"), 1, (1, 1)],
+        [lazy_fixture("one_tree_center"), 2, (0, 0)],
+        [lazy_fixture("ring_of_trees"), 0, (2, 2)],
+        [lazy_fixture("ring_of_trees"), 1, (1, 1)],
+        [lazy_fixture("ring_of_trees"), 2, (3, 1)],
+        [lazy_fixture("sample_map"), 0, (2, 2)],
+        [lazy_fixture("sample_map"), 1, (2, 2)],
+        [lazy_fixture("sample_map"), 2, (1, 4)],
+        [lazy_fixture("sample_map"), 3, (3, 1)],
+        [lazy_fixture("sample_map"), 4, (3, 1)],
+    ],
+)
+def test_number_of_visible_trees_in_colum(
+    map: Map, column: int, expected_number_of_trees: tuple[int, int]
+) -> None:
+    visible_down = number_of_visible_trees_in_column(column, Direction.DOWN, map)
+    visible_down = number_of_visible_trees_in_column(column, Direction.UP, map)
+
+    assert visible_down == expected_number_of_trees[Direction.DOWN]
+    assert visible_down == expected_number_of_trees[Direction.UP]

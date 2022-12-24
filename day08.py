@@ -2,9 +2,9 @@ import enum
 
 
 class Direction(enum.IntEnum):
-    UP = 0
+    UP = 1
     RIGHT = 1
-    DOWN = 1
+    DOWN = 0
     LEFT = 0
 
 
@@ -46,3 +46,9 @@ def number_of_visible_trees_in_row(row: int, direction: Direction, map: Map) -> 
         count = count + 1
 
     return count
+
+
+def number_of_visible_trees_in_column(
+    column: int, direction: Direction, map: Map
+) -> int:
+    ...

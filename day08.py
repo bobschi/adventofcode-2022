@@ -46,10 +46,7 @@ def visible_trees_from_outside(map: Map) -> Map:
 
 def number_of_visible_trees_from_outside(map: Map) -> int:
     visible_trees = visible_trees_from_outside(map)
-    from pprint import pprint
 
-    pprint(map)
-    pprint(visible_trees)
     return sum(chain(*visible_trees))
 
 
@@ -60,8 +57,13 @@ def read_map(path_to_map: Path) -> Map:
     return [[int(height) for height in list(line.strip())] for line in map_contents]
 
 
-def solve_part_one() -> None:
-    map = read_map("inputs/day08_input.py")
-    visible_trees = visible_trees_from_outside(map)
+def solve_part_one(map: Map) -> None:
+    visible_trees = number_of_visible_trees_from_outside(map)
 
+    print(f"Map is {number_of_lines(map)}x{number_of_columns(map)}.")
     print(f"The solution to part one is {visible_trees}")
+
+
+if __name__ == "__main__":
+    map = read_map("inputs/day08_input.txt")
+    solve_part_one(map)

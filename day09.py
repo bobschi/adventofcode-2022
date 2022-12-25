@@ -1,6 +1,7 @@
+import enum
+import math
 from dataclasses import dataclass
 from pathlib import Path
-import enum
 from typing import Self
 
 
@@ -43,7 +44,12 @@ class RopeEnd:
                 return self + RopeEnd(0, -1)
 
     def sign(self) -> Self:
-        return RopeEnd(math.copysign(1, self.x), math.copysign(1, self.y))
+        def _sign(number: int) -> int:
+            if number == 0:
+                return -1
+            return math.copysign(1, number)
+
+        return RopeEnd(_sign(self.x), _sign(self.y))
 
     def follow(self, other: Self) -> Self:
     def __add__(self, other: Self) -> Self:

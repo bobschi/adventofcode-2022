@@ -54,7 +54,7 @@ def test_move_rope_end(head: RopeEnd) -> None:
         [RopeEnd(5, -3), RopeEnd(1, -1)],
         [RopeEnd(-2, -4), RopeEnd(-1, -1)],
         [RopeEnd(-1, -1), RopeEnd(-1, -1)],
-        [RopeEnd(0, 0), RopeEnd(1, 1)],
+        [RopeEnd(0, 0), RopeEnd(0, 0)],
     ],
 )
 def test_sign(rope_end: RopeEnd, expected_sign: RopeEnd):

@@ -17,14 +17,22 @@ def sample_command_list() -> list[Command]:
     ]
 
 
+@pytest.fixture
+def head() -> RopeEnd:
+    return RopeEnd()
+
+
+@pytest.fixture
+def tail() -> RopeEnd:
+    return RopeEnd()
+
+
 def test_read_commands(sample_command_list: list[Command]) -> None:
     command_list = read_commands("inputs/day09_sample.txt")
     assert command_list == sample_command_list
 
 
-def test_move_rope_end() -> None:
-    head = RopeEnd()
-
+def test_move_rope_end(head: RopeEnd) -> None:
     head = head.move(Direction.LEFT)
     assert head == RopeEnd(-1, 0)
 

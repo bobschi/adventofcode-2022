@@ -3,6 +3,7 @@ import pytest
 
 from day08 import (
     Map,
+    max_scenic_score,
     number_of_visible_trees_from_outside,
     read_map,
     visible_trees_from_outside,
@@ -41,3 +42,7 @@ def test_number_of_visible_trees_from_outside(sample_map) -> None:
 
 def test_visible_trees_from_outside(sample_map, sample_visibility):
     assert visible_trees_from_outside(sample_map) == sample_visibility
+
+
+def test_max_scenic_score(sample_map) -> None:
+    assert max_scenic_score(sample_map) == 8

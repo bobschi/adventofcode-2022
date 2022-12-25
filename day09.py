@@ -46,8 +46,8 @@ class RopeEnd:
     def sign(self) -> Self:
         def _sign(number: int) -> int:
             if number == 0:
-                return -1
-            return math.copysign(1, number)
+                return 0
+            return int(math.copysign(1, number))
 
         return RopeEnd(_sign(self.x), _sign(self.y))
 

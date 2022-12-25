@@ -20,6 +20,7 @@ def sample_map() -> Map:
     ]
 
 
+@pytest.fixture
 def sample_visibility() -> Map:
     return [
         [1, 1, 1, 1, 1],

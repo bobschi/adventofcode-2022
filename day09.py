@@ -42,6 +42,10 @@ class RopeEnd:
             case Direction.DOWN:
                 return self + RopeEnd(0, -1)
 
+    def sign(self) -> Self:
+        return RopeEnd(math.copysign(1, self.x), math.copysign(1, self.y))
+
+    def follow(self, other: Self) -> Self:
     def __add__(self, other: Self) -> Self:
         return RopeEnd(self.x + other.x, self.y + other.y)
 

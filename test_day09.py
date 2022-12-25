@@ -44,3 +44,19 @@ def test_move_rope_end(head: RopeEnd) -> None:
 
     head = head.move(Direction.DOWN)
     assert head == RopeEnd()
+
+
+@pytest.mark.parametrize(
+    "rope_end,expected_sign",
+    [
+        [RopeEnd(10, 9), RopeEnd(1, 1)],
+        [RopeEnd(-8, 7), RopeEnd(-1, 1)],
+        [RopeEnd(5, -3), RopeEnd(1, -1)],
+        [RopeEnd(-2, -4), RopeEnd(-1, -1)],
+        [RopeEnd(-1, -1), RopeEnd(-1, -1)],
+        [RopeEnd(0, 0), RopeEnd(1, 1)],
+    ],
+)
+def test_sign(rope_end: RopeEnd, expected_sign: RopeEnd):
+    assert rope_end.sign() == expected_sign
+

@@ -52,6 +52,13 @@ class RopeEnd:
         return RopeEnd(_sign(self.x), _sign(self.y))
 
     def follow(self, other: Self) -> Self:
+        difference = other - self
+
+        if difference == difference.sign():
+            return self
+
+        return self + difference.sign()
+
     def __add__(self, other: Self) -> Self:
         return RopeEnd(self.x + other.x, self.y + other.y)
 

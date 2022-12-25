@@ -60,3 +60,45 @@ def test_move_rope_end(head: RopeEnd) -> None:
 def test_sign(rope_end: RopeEnd, expected_sign: RopeEnd):
     assert rope_end.sign() == expected_sign
 
+
+@pytest.mark.parametrize(
+    "direction,end_position",
+    [
+        [Direction.LEFT, RopeEnd(-1, 0)],
+        [Direction.UP, RopeEnd(0, 1)],
+        [Direction.RIGHT, RopeEnd(1, 0)],
+        [Direction.DOWN, RopeEnd(0, -1)],
+    ],
+)
+def test_follow_other_end_on_axis(
+    head: RopeEnd, tail: RopeEnd, direction: Direction, end_position: RopeEnd
+) -> None:
+    head = head.move(direction)
+    tail = tail.follow(head)
+
+    print(head, tail)
+    assert tail == RopeEnd()
+
+    head = head.move(direction)
+    tail = tail.follow(head)
+
+    assert tail == end_position
+
+
+@pytest.mark.parametrize(
+    "directions,end_position",
+    [
+        [[Direction.RIGHT, Direction.UP, Direction.UP], RopeEnd(1, 1)],
+        [[Direction.LEFT, Direction.UP, Direction.UP], RopeEnd(-1, 1)],
+        [[Direction.RIGHT, Direction.DOWN, Direction.DOWN], RopeEnd(1, -1)],
+        [[Direction.LEFT, Direction.DOWN, Direction.DOWN], RopeEnd(-1, -1)],
+    ],
+)
+def test_follow_other_end_on_diagonals(
+    head: RopeEnd, tail: RopeEnd, directions: Direction, end_position: RopeEnd
+) -> None:
+    for direction in directions:
+        head = head.move(direction)
+        tail = tail.follow(head)
+
+    assert tail == end_position

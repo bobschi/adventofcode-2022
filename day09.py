@@ -1,5 +1,7 @@
+from dataclasses import dataclass
 from pathlib import Path
 import enum
+from typing import Self
 
 
 class Direction(enum.StrEnum):
@@ -22,3 +24,23 @@ def read_commands(command_file_path: Path) -> list[Command]:
         command_list.append((Direction(direction), int(amount)))
 
     return command_list
+
+
+@dataclass
+class RopeEnd:
+    x: int = 0
+    y: int = 0
+
+    def move(self, direction: Direction) -> Self:
+        match direction:
+            case Direction.LEFT:
+                return self + RopeEnd(-1, 0)
+            case Direction.UP:
+                return self + RopeEnd(0, 1)
+            case Direction.RIGHT:
+                return self + RopeEnd(1, 0)
+            case Direction.DOWN:
+                return self + RopeEnd(0, -1)
+
+    def __add__(self, other: Self) -> Self:
+        return RopeEnd(self.x + other.x, self.y + other.y)

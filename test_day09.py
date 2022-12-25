@@ -26,13 +26,13 @@ def test_move_rope_end() -> None:
     head = RopeEnd()
 
     head = head.move(Direction.LEFT)
-    assert head.x == -1 and head.y == 0
+    assert head == RopeEnd(-1, 0)
 
     head = head.move(Direction.UP)
-    assert head.x == -1 and head.y == 1
+    assert head == RopeEnd(-1, 1)
 
     head = head.move(Direction.RIGHT)
-    assert head.x == 0 and head.y == 1
+    assert head == RopeEnd(0, 1)
 
     head = head.move(Direction.DOWN)
-    assert head.x == 0 and head.y == 0
+    assert head == RopeEnd()

@@ -44,3 +44,6 @@ class RopeEnd:
 
     def __add__(self, other: Self) -> Self:
         return RopeEnd(self.x + other.x, self.y + other.y)
+
+    def __eq__(self, other: Self) -> bool:
+        return self.x == other.x and self.y == other.y

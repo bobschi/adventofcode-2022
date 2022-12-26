@@ -68,6 +68,9 @@ class RopeEnd:
     def __eq__(self, other: Self) -> bool:
         return self.x == other.x and self.y == other.y
 
+    def __hash__(self) -> int:
+        return hash((self.x + self.y))
+
 
 @dataclass(frozen=True)
 class Rope:

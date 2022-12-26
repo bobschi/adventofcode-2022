@@ -1,6 +1,6 @@
 import pytest
 
-from day09 import Direction, Command, Rope, RopeEnd, read_commands
+from day09 import Direction, Command, Rope, RopeEnd, execute_commands, read_commands
 
 
 @pytest.fixture
@@ -166,3 +166,9 @@ def test_rope(directions: list[Direction], end_result: Rope) -> None:
 
     assert rope == end_result
     print()
+
+
+def test_execute_commands(sample_command_list: list[Command]) -> None:
+    visited = execute_commands(sample_command_list)
+
+    assert len(visited) == 13

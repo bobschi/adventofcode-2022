@@ -85,3 +85,17 @@ class Rope:
 
     def __eq__(self, other: Self) -> bool:
         return self.head == other.head and self.tail == other.tail
+
+
+def execute_commands(commands: list[Command]) -> set[RopeEnd]:
+    rope = Rope()
+    visited = set()
+
+    for command in commands:
+        for _ in range(command[1]):
+            rope = rope.move_head(command[0])
+            visited.add(rope.tail)
+
+    return visited
+
+

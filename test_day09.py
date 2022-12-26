@@ -1,6 +1,6 @@
 import pytest
 
-from day09 import Direction, Command, RopeEnd, read_commands
+from day09 import Direction, Command, Rope, RopeEnd, read_commands
 
 
 @pytest.fixture
@@ -94,10 +94,75 @@ def test_follow_other_end_on_axis(
     ],
 )
 def test_follow_other_end_on_diagonals(
-    head: RopeEnd, tail: RopeEnd, directions: Direction, end_position: RopeEnd
+    head: RopeEnd, tail: RopeEnd, directions: list[Direction], end_position: RopeEnd
 ) -> None:
     for direction in directions:
         head = head.move(direction)
         tail = tail.follow(head)
 
     assert tail == end_position
+
+
+@pytest.mark.parametrize(
+    "directions,end_result",
+    [
+        [
+            [Direction.LEFT, Direction.LEFT],
+            Rope(RopeEnd(-2, 0), RopeEnd(-1, 0)),
+        ],
+        [
+            [Direction.UP, Direction.UP],
+            Rope(RopeEnd(0, 2), RopeEnd(0, 1)),
+        ],
+        [
+            [Direction.RIGHT, Direction.RIGHT],
+            Rope(RopeEnd(2, 0), RopeEnd(1, 0)),
+        ],
+        [
+            [Direction.DOWN, Direction.DOWN],
+            Rope(RopeEnd(0, -2), RopeEnd(0, -1)),
+        ],
+        [
+            [Direction.RIGHT, Direction.UP, Direction.UP],
+            Rope(RopeEnd(1, 2), RopeEnd(1, 1)),
+        ],
+        [
+            [Direction.LEFT, Direction.UP, Direction.UP],
+            Rope(RopeEnd(-1, 2), RopeEnd(-1, 1)),
+        ],
+        [
+            [Direction.DOWN, Direction.RIGHT, Direction.DOWN],
+            Rope(RopeEnd(1, -2), RopeEnd(1, -1)),
+        ],
+        [
+            [Direction.DOWN, Direction.LEFT, Direction.DOWN],
+            Rope(RopeEnd(-1, -2), RopeEnd(-1, -1)),
+        ],
+        [
+            [Direction.LEFT, Direction.UP, Direction.LEFT],
+            Rope(RopeEnd(-2, 1), RopeEnd(-1, 1)),
+        ],
+        [
+            [Direction.LEFT, Direction.DOWN, Direction.LEFT],
+            Rope(RopeEnd(-2, -1), RopeEnd(-1, -1)),
+        ],
+        [
+            [Direction.RIGHT, Direction.UP, Direction.RIGHT],
+            Rope(RopeEnd(2, 1), RopeEnd(1, 1)),
+        ],
+        [
+            [Direction.RIGHT, Direction.DOWN, Direction.RIGHT],
+            Rope(RopeEnd(2, -1), RopeEnd(1, -1)),
+        ],
+    ],
+)
+def test_rope(directions: list[Direction], end_result: Rope) -> None:
+    rope = Rope()
+    print(rope)
+
+    for direction in directions:
+        rope = rope.move_head(direction)
+        print(rope)
+
+    assert rope == end_result
+    print()

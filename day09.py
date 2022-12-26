@@ -1,6 +1,6 @@
 import enum
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Self
 
@@ -67,3 +67,18 @@ class RopeEnd:
 
     def __eq__(self, other: Self) -> bool:
         return self.x == other.x and self.y == other.y
+
+
+@dataclass(frozen=True)
+class Rope:
+    head: RopeEnd = field(default_factory=RopeEnd)
+    tail: RopeEnd = field(default_factory=RopeEnd)
+
+    def move_head(self, direction: Direction) -> Self:
+        new_head = self.head.move(direction)
+        new_tail = self.tail.follow(new_head)
+
+        return Rope(new_head, new_tail)
+
+    def __eq__(self, other: Self) -> bool:
+        return self.head == other.head and self.tail == other.tail

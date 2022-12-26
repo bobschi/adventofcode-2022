@@ -73,7 +73,7 @@ class RopeEnd:
 
 
 @dataclass(frozen=True)
-class Rope:
+class TwoKnotRope:
     head: RopeEnd = field(default_factory=RopeEnd)
     tail: RopeEnd = field(default_factory=RopeEnd)
 
@@ -81,14 +81,14 @@ class Rope:
         new_head = self.head.move(direction)
         new_tail = self.tail.follow(new_head)
 
-        return Rope(new_head, new_tail)
+        return TwoKnotRope(new_head, new_tail)
 
     def __eq__(self, other: Self) -> bool:
         return self.head == other.head and self.tail == other.tail
 
 
 def execute_commands(commands: list[Command]) -> set[RopeEnd]:
-    rope = Rope()
+    rope = TwoKnotRope()
     visited = set()
 
     for command in commands:

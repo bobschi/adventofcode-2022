@@ -1,6 +1,13 @@
 import pytest
 
-from day09 import Direction, Command, Rope, RopeEnd, execute_commands, read_commands
+from day09 import (
+    Direction,
+    Command,
+    TwoKnotRope,
+    RopeEnd,
+    execute_commands,
+    read_commands,
+)
 
 
 @pytest.fixture
@@ -108,56 +115,56 @@ def test_follow_other_end_on_diagonals(
     [
         [
             [Direction.LEFT, Direction.LEFT],
-            Rope(RopeEnd(-2, 0), RopeEnd(-1, 0)),
+            TwoKnotRope(RopeEnd(-2, 0), RopeEnd(-1, 0)),
         ],
         [
             [Direction.UP, Direction.UP],
-            Rope(RopeEnd(0, 2), RopeEnd(0, 1)),
+            TwoKnotRope(RopeEnd(0, 2), RopeEnd(0, 1)),
         ],
         [
             [Direction.RIGHT, Direction.RIGHT],
-            Rope(RopeEnd(2, 0), RopeEnd(1, 0)),
+            TwoKnotRope(RopeEnd(2, 0), RopeEnd(1, 0)),
         ],
         [
             [Direction.DOWN, Direction.DOWN],
-            Rope(RopeEnd(0, -2), RopeEnd(0, -1)),
+            TwoKnotRope(RopeEnd(0, -2), RopeEnd(0, -1)),
         ],
         [
             [Direction.RIGHT, Direction.UP, Direction.UP],
-            Rope(RopeEnd(1, 2), RopeEnd(1, 1)),
+            TwoKnotRope(RopeEnd(1, 2), RopeEnd(1, 1)),
         ],
         [
             [Direction.LEFT, Direction.UP, Direction.UP],
-            Rope(RopeEnd(-1, 2), RopeEnd(-1, 1)),
+            TwoKnotRope(RopeEnd(-1, 2), RopeEnd(-1, 1)),
         ],
         [
             [Direction.DOWN, Direction.RIGHT, Direction.DOWN],
-            Rope(RopeEnd(1, -2), RopeEnd(1, -1)),
+            TwoKnotRope(RopeEnd(1, -2), RopeEnd(1, -1)),
         ],
         [
             [Direction.DOWN, Direction.LEFT, Direction.DOWN],
-            Rope(RopeEnd(-1, -2), RopeEnd(-1, -1)),
+            TwoKnotRope(RopeEnd(-1, -2), RopeEnd(-1, -1)),
         ],
         [
             [Direction.LEFT, Direction.UP, Direction.LEFT],
-            Rope(RopeEnd(-2, 1), RopeEnd(-1, 1)),
+            TwoKnotRope(RopeEnd(-2, 1), RopeEnd(-1, 1)),
         ],
         [
             [Direction.LEFT, Direction.DOWN, Direction.LEFT],
-            Rope(RopeEnd(-2, -1), RopeEnd(-1, -1)),
+            TwoKnotRope(RopeEnd(-2, -1), RopeEnd(-1, -1)),
         ],
         [
             [Direction.RIGHT, Direction.UP, Direction.RIGHT],
-            Rope(RopeEnd(2, 1), RopeEnd(1, 1)),
+            TwoKnotRope(RopeEnd(2, 1), RopeEnd(1, 1)),
         ],
         [
             [Direction.RIGHT, Direction.DOWN, Direction.RIGHT],
-            Rope(RopeEnd(2, -1), RopeEnd(1, -1)),
+            TwoKnotRope(RopeEnd(2, -1), RopeEnd(1, -1)),
         ],
     ],
 )
-def test_rope(directions: list[Direction], end_result: Rope) -> None:
-    rope = Rope()
+def test_rope(directions: list[Direction], end_result: TwoKnotRope) -> None:
+    rope = TwoKnotRope()
     print(rope)
 
     for direction in directions:

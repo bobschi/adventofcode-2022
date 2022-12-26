@@ -106,5 +106,35 @@ def solve_part_one() -> None:
     print(f"The solution for part one is {len(visited)}")
 
 
+@dataclass(frozen=True)
+class TenKnotRope:
+    knots: list[RopeEnd] = field(default_factory=list)
+
+    def __init__(self) -> Self:
+        self.knots = [[RopeEnd()] * 10]
+
+    @property
+    def head(self) -> RopeEnd:
+        return self.knots[0]
+
+    @property
+    def tail(self) -> RopeEnd:
+        return self.knots[-1]
+
+    def move_head(self, direction: Direction) -> Self:
+        new_knots = [self.head.move(direction)]
+        for index, knot in enumerate(self.knots[1:]):
+            new_knots.append(knot.follow(new_knots[index]))
+
+        return TenKnotRope(knots=new_knots)
+
+
+def solve_part_one() -> None:
+    commands = read_commands("inputs/day09_input.txt")
+    visited = execute_commands(commands)
+
+    print(f"The solution for part two is {len(visited)}")
+
+
 if __name__ == "__main__":
     solve_part_one()

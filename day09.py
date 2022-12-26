@@ -99,3 +99,12 @@ def execute_commands(commands: list[Command]) -> set[RopeEnd]:
     return visited
 
 
+def solve_part_one() -> None:
+    commands = read_commands("inputs/day09_input.txt")
+    visited = execute_commands(commands)
+
+    print(f"The solution for part one is {len(visited)}")
+
+
+if __name__ == "__main__":
+    solve_part_one()

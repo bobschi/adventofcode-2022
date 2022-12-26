@@ -76,7 +76,6 @@ def test_follow_other_end_on_axis(
     head = head.move(direction)
     tail = tail.follow(head)
 
-    print(head, tail)
     assert tail == RopeEnd()
 
     head = head.move(direction)

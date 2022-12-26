@@ -141,10 +141,18 @@ class TenKnotRope:
 
 def solve_part_one() -> None:
     commands = read_commands("inputs/day09_input.txt")
-    visited = execute_commands(commands)
+    visited = execute_commands(commands, TwoKnotRope())
+
+    print(f"The solution for part one is {len(visited)}")
+
+
+def solve_part_two() -> None:
+    commands = read_commands("inputs/day09_input.txt")
+    visited = execute_commands(commands, TenKnotRope())
 
     print(f"The solution for part two is {len(visited)}")
 
 
 if __name__ == "__main__":
     solve_part_one()
+    solve_part_two()

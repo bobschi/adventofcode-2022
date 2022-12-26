@@ -3,6 +3,7 @@ import pytest
 from day09 import (
     Direction,
     Command,
+    TenKnotRope,
     TwoKnotRope,
     RopeEnd,
     execute_commands,
@@ -165,17 +166,37 @@ def test_follow_other_end_on_diagonals(
 )
 def test_rope(directions: list[Direction], end_result: TwoKnotRope) -> None:
     rope = TwoKnotRope()
-    print(rope)
 
     for direction in directions:
         rope = rope.move_head(direction)
-        print(rope)
 
     assert rope == end_result
-    print()
 
 
 def test_execute_commands(sample_command_list: list[Command]) -> None:
-    visited = execute_commands(sample_command_list)
+    visited = execute_commands(sample_command_list, TwoKnotRope())
 
     assert len(visited) == 13
+
+
+def test_execute_commands(sample_command_list: list[Command]) -> None:
+    visited = execute_commands(sample_command_list, TenKnotRope())
+
+    assert len(visited) == 1
+
+
+def test_execute_commands() -> None:
+    commands = [
+        (Direction.RIGHT, 5),
+        (Direction.UP, 8),
+        (Direction.LEFT, 8),
+        (Direction.DOWN, 3),
+        (Direction.RIGHT, 17),
+        (Direction.DOWN, 10),
+        (Direction.LEFT, 25),
+        (Direction.UP, 20),
+    ]
+
+    visited = execute_commands(commands, TenKnotRope())
+
+    assert len(visited) == 36

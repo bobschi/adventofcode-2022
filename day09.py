@@ -2,7 +2,7 @@ import enum
 import math
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Self
+from typing import Protocol, Self
 
 
 class Direction(enum.StrEnum):
@@ -72,6 +72,14 @@ class RopeEnd:
         return hash((self.x + self.y))
 
 
+class Rope(Protocol):
+    head: RopeEnd
+    tail: RopeEnd
+
+    def move_head(self, direction: Direction) -> Self:
+        ...
+
+
 @dataclass(frozen=True)
 class TwoKnotRope:
     head: RopeEnd = field(default_factory=RopeEnd)
@@ -87,8 +95,7 @@ class TwoKnotRope:
         return self.head == other.head and self.tail == other.tail
 
 
-def execute_commands(commands: list[Command]) -> set[RopeEnd]:
-    rope = TwoKnotRope()
+def execute_commands(commands: list[Command], rope: Rope) -> set[RopeEnd]:
     visited = set()
 
     for command in commands:
@@ -106,12 +113,15 @@ def solve_part_one() -> None:
     print(f"The solution for part one is {len(visited)}")
 
 
-@dataclass(frozen=True)
+@dataclass
 class TenKnotRope:
     knots: list[RopeEnd] = field(default_factory=list)
 
-    def __init__(self) -> Self:
-        self.knots = [[RopeEnd()] * 10]
+    def __init__(self, knots: list[RopeEnd] = None) -> Self:
+        if knots is None:
+            self.knots = [RopeEnd() for _ in range(10)]
+        else:
+            self.knots = knots
 
     @property
     def head(self) -> RopeEnd:
@@ -126,7 +136,7 @@ class TenKnotRope:
         for index, knot in enumerate(self.knots[1:]):
             new_knots.append(knot.follow(new_knots[index]))
 
-        return TenKnotRope(knots=new_knots)
+        return TenKnotRope(new_knots)
 
 
 def solve_part_one() -> None:

@@ -1,5 +1,5 @@
 import pytest
-from day10 import execute
+from day10 import calculate_display_contents, execute
 
 
 @pytest.fixture
@@ -181,3 +181,19 @@ def test_execute(large_sample: list[str]) -> None:
     assert register_states[140] == 21  # During 140th cycle
     assert register_states[180] == 16  # During 180th cycle
     assert register_states[220] == 18  # During 220th cycle
+
+
+def test_draw_display(large_sample: list[str]) -> None:
+    expected_result = [
+        "##..##..##..##..##..##..##..##..##..##..",
+        "###...###...###...###...###...###...###.",
+        "####....####....####....####....####....",
+        "#####.....#####.....#####.....#####.....",
+        "######......######......######......####",
+        "#######.......#######.......#######.....",
+    ]
+
+    register_states = execute(large_sample)
+    display_content = calculate_display_contents(register_states)
+
+    assert display_content == expected_result

@@ -51,6 +51,15 @@ def test_inspect_item_changes_worry_level(monkey_0: Monkey) -> None:
     assert monkey_0.worry_levels[0] == 500
 
 
+def test_inspect_item_and_throw_passes_on_correct_worry_level(
+    monkey_0: Monkey, monkey_1: Monkey
+) -> None:
+    monkey_0.inspect_item()
+    monkey_0.throw_item(monkey_1)
+
+    assert monkey_1.worry_levels[-1] == 500
+
+
 def test_inspect_items_raises_inspection_count(monkey_0: Monkey) -> None:
     assert monkey_0.inspection_count == 0
     monkey_0.inspect_item()

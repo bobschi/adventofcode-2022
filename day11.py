@@ -22,13 +22,13 @@ class Monkey:
         other.worry_levels.append(item_to_throw)
 
     def inspect_item(self) -> int:
-        inspected_item = self.worry_levels[0]
-        worry_level = eval(self.operation.replace("old", str(inspected_item)))
-        worry_level /= 3
+        new_worry_level = eval(self.operation.replace("old", str(self.worry_levels[0])))
+        new_worry_level //= 3
+        self.worry_levels[0] = new_worry_level
 
         self.inspection_count += 1
 
-        if self.test(worry_level):
+        if self.test(self.worry_levels[0]):
             return self.success_monkey_id
 
         else:
@@ -65,3 +65,10 @@ def spawn_monkey(monkey_block: str) -> Monkey:
                 new_monkey_values["failure_monkey_id"] = int(failure_monkey_id)
 
     return Monkey(**new_monkey_values)
+
+
+def do_one_inspection_round(monkeys: list[Monkey]) -> None:
+    for monkey in monkeys:
+        while next(monkey.worry_levels):
+            throw_to = monkey.inspect_item()
+            monkey.throw_item(monkeys[throw_to])

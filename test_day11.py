@@ -36,3 +36,10 @@ def test_throwing_item(monkey_0: Monkey, monkey_1: Monkey) -> None:
 
     assert monkey_0.worry_levels == [98]
     assert monkey_1.worry_levels == [54, 65, 75, 74, 79]
+
+
+def test_inspect_item(monkey_0: Monkey, monkey_1: Monkey) -> None:
+    assert monkey_0.inspect_item() == 3
+    monkey_0.throw_item(monkey_1)
+    assert monkey_0.inspect_item() == 3
+    assert monkey_1.inspect_item() == 0

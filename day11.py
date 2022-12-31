@@ -21,6 +21,17 @@ class Monkey:
         item_to_throw = self.worry_levels.pop(0)
         other.worry_levels.append(item_to_throw)
 
+    def inspect_item(self) -> int:
+        inspected_item = self.worry_levels[0]
+        worry_level = eval(self.operation.replace("old", str(inspected_item)))
+        worry_level /= 3
+
+        if self.test(worry_level):
+            return self.success_monkey_id
+
+        else:
+            return self.failure_monkey_id
+
 
 def read_scenario(scenario: str) -> list[Monkey]:
     return [spawn_monkey(monkey_block) for monkey_block in scenario.split("\n\n")]

@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Self
 
 SESSION = open(".aoc-token").read()
 
@@ -15,6 +16,10 @@ class Monkey:
 
     def test(self, worry_level: int) -> bool:
         return worry_level % self.divisor == 0
+
+    def throw_item(self, other: Self) -> None:
+        item_to_throw = self.worry_levels.pop(0)
+        other.worry_levels.append(item_to_throw)
 
 
 def read_scenario(scenario: str) -> list[Monkey]:

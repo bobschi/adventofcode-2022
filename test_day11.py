@@ -1,6 +1,6 @@
 import pytest
 
-from day11 import Monkey, spawn_monkey
+from day11 import Monkey, do_inspection_round, spawn_monkey
 
 
 @pytest.fixture
@@ -66,3 +66,17 @@ def test_inspect_items_raises_inspection_count(monkey_0: Monkey) -> None:
     assert monkey_0.inspection_count == 1
     monkey_0.inspect_item()
     assert monkey_0.inspection_count == 2
+
+
+def test_inspection_round(monkey_0: Monkey, monkey_1: Monkey) -> None:
+    monkey_0.success_monkey_id = 1
+    monkey_0.failure_monkey_id = 1
+    monkey_1.success_monkey_id = 0
+    monkey_1.failure_monkey_id = 0
+
+    monkeys = [monkey_0, monkey_1]
+
+    do_inspection_round(monkeys)
+
+    assert len(monkeys[0].worry_levels) == 6
+    assert len(monkeys[1].worry_levels) == 0

@@ -18,6 +18,7 @@ class Monkey:
         return worry_level % self.divisor == 0
 
     def throw_item(self, other: Self) -> None:
+        print(f"Throw to monkey {other.id}.")
         item_to_throw = self.worry_levels.pop(0)
         other.worry_levels.append(item_to_throw)
 
@@ -67,8 +68,8 @@ def spawn_monkey(monkey_block: str) -> Monkey:
     return Monkey(**new_monkey_values)
 
 
-def do_one_inspection_round(monkeys: list[Monkey]) -> None:
+def do_inspection_round(monkeys: list[Monkey]) -> None:
     for monkey in monkeys:
-        while next(monkey.worry_levels):
+        while monkey.worry_levels:
             throw_to = monkey.inspect_item()
             monkey.throw_item(monkeys[throw_to])

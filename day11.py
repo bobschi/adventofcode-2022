@@ -74,9 +74,15 @@ def do_inspection_round(monkeys: list[Monkey]) -> None:
             monkey.throw_item(monkeys[throw_to])
 
 
-def get_two_most_active_monkeys_inspections_sum(monkeys: list[Monkey]) -> int:
+def get_level_of_monkey_business(monkeys: list[Monkey]) -> int:
     monkeys_by_inpsection_count = list(
         sorted(monkeys, key=lambda monkey: monkey.inspection_count, reverse=True)
     )
 
-    return sum([monkey.inspection_count for monkey in monkeys_by_inpsection_count[0:2]])
+    return (
+        monkeys_by_inpsection_count[0].inspection_count
+        * monkeys_by_inpsection_count[1].inspection_count
+    )
+
+
+

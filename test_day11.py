@@ -3,7 +3,7 @@ import pytest
 from day11 import (
     Monkey,
     do_inspection_round,
-    get_two_most_active_monkeys_inspections_sum,
+    get_level_of_monkey_business,
     spawn_monkey,
 )
 
@@ -97,4 +97,5 @@ def test_sum_of_most_two_active_monkeys(monkey_0: Monkey, monkey_1: Monkey) -> N
 
     do_inspection_round(monkeys)
 
-    assert get_two_most_active_monkeys_inspections_sum(monkeys) == 8
+    assert get_level_of_monkey_business(monkeys) == 12
+

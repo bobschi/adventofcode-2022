@@ -39,7 +39,7 @@ def spawn_monkey(monkey_block: str) -> Monkey:
             case ["Starting", "items", *items]:
                 new_monkey_values["worry_levels"] = list(map(int, items))
 
-            case ["Operation", *operation]:
+            case ["Operation", "new", "=", *operation]:
                 new_monkey_values["operation"] = " ".join(operation)
 
             case ["Test", "divisible", "by", divisor]:

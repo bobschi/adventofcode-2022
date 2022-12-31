@@ -17,12 +17,12 @@ def sample_monkey_block() -> str:
 
 @pytest.fixture
 def monkey_0() -> Monkey:
-    return Monkey(0, [79, 98], "new = old * 19", 23, 2, 3)
+    return Monkey(0, [79, 98], "old * 19", 23, 2, 3)
 
 
 @pytest.fixture
 def monkey_1() -> Monkey:
-    return Monkey(1, [54, 65, 75, 74], "new = old + 6", 19, 2, 0)
+    return Monkey(1, [54, 65, 75, 74], "old + 6", 19, 2, 0)
 
 
 def test_spawn_monkey(sample_monkey_block: str, monkey_0: Monkey) -> None:

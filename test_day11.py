@@ -1,6 +1,11 @@
 import pytest
 
-from day11 import Monkey, do_inspection_round, spawn_monkey
+from day11 import (
+    Monkey,
+    do_inspection_round,
+    get_two_most_active_monkeys_inspections_sum,
+    spawn_monkey,
+)
 
 
 @pytest.fixture
@@ -80,3 +85,16 @@ def test_inspection_round(monkey_0: Monkey, monkey_1: Monkey) -> None:
 
     assert len(monkeys[0].worry_levels) == 6
     assert len(monkeys[1].worry_levels) == 0
+
+
+def test_sum_of_most_two_active_monkeys(monkey_0: Monkey, monkey_1: Monkey) -> None:
+    monkey_0.success_monkey_id = 1
+    monkey_0.failure_monkey_id = 1
+    monkey_1.success_monkey_id = 0
+    monkey_1.failure_monkey_id = 0
+
+    monkeys = [monkey_0, monkey_1]
+
+    do_inspection_round(monkeys)
+
+    assert get_two_most_active_monkeys_inspections_sum(monkeys) == 8

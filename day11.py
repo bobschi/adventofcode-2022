@@ -18,7 +18,6 @@ class Monkey:
         return worry_level % self.divisor == 0
 
     def throw_item(self, other: Self) -> None:
-        print(f"Throw to monkey {other.id}.")
         item_to_throw = self.worry_levels.pop(0)
         other.worry_levels.append(item_to_throw)
 
@@ -73,3 +72,11 @@ def do_inspection_round(monkeys: list[Monkey]) -> None:
         while monkey.worry_levels:
             throw_to = monkey.inspect_item()
             monkey.throw_item(monkeys[throw_to])
+
+
+def get_two_most_active_monkeys_inspections_sum(monkeys: list[Monkey]) -> int:
+    monkeys_by_inpsection_count = list(
+        sorted(monkeys, key=lambda monkey: monkey.inspection_count, reverse=True)
+    )
+
+    return sum([monkey.inspection_count for monkey in monkeys_by_inpsection_count[0:2]])

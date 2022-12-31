@@ -8,11 +8,11 @@ SESSION = open(".aoc-token").read()
 class Monkey:
     id: int
     worry_levels: list[int]
-    # TODO: Figure out how to make this into a Callable, ideally
     operation: str
     divisor: int
     success_monkey_id: int
     failure_monkey_id: int
+    inspection_count: int = 0
 
     def test(self, worry_level: int) -> bool:
         return worry_level % self.divisor == 0
@@ -25,6 +25,8 @@ class Monkey:
         inspected_item = self.worry_levels[0]
         worry_level = eval(self.operation.replace("old", str(inspected_item)))
         worry_level /= 3
+
+        self.inspection_count += 1
 
         if self.test(worry_level):
             return self.success_monkey_id

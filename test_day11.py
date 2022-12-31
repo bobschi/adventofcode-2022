@@ -43,3 +43,11 @@ def test_inspect_item(monkey_0: Monkey, monkey_1: Monkey) -> None:
     monkey_0.throw_item(monkey_1)
     assert monkey_0.inspect_item() == 3
     assert monkey_1.inspect_item() == 0
+
+
+def test_inspect_items_raises_inspection_count(monkey_0: Monkey) -> None:
+    assert monkey_0.inspection_count == 0
+    monkey_0.inspect_item()
+    assert monkey_0.inspection_count == 1
+    monkey_0.inspect_item()
+    assert monkey_0.inspection_count == 2

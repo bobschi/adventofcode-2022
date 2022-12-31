@@ -1,5 +1,8 @@
 from dataclasses import dataclass
+from operator import mul
 from typing import Self
+
+import aocd
 
 SESSION = open(".aoc-token").read()
 
@@ -85,4 +88,17 @@ def get_level_of_monkey_business(monkeys: list[Monkey]) -> int:
     )
 
 
+def solve_part_one() -> None:
+    data = aocd.get_data(session=SESSION, day=11, year=2022)
 
+    monkeys = read_scenario(data)
+    for _ in range(20):
+        do_inspection_round(monkeys)
+
+    solution = get_level_of_monkey_business(monkeys)
+
+    aocd.submit(answer=solution, part="a", day=11, year=2022, session=SESSION)
+
+
+if __name__ == "__main__":
+    solve_part_one()

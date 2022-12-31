@@ -4,6 +4,7 @@ from day11 import (
     Monkey,
     do_inspection_round,
     get_level_of_monkey_business,
+    read_scenario,
     spawn_monkey,
 )
 
@@ -99,3 +100,13 @@ def test_sum_of_most_two_active_monkeys(monkey_0: Monkey, monkey_1: Monkey) -> N
 
     assert get_level_of_monkey_business(monkeys) == 12
 
+
+def test_run_sample_scenario() -> None:
+    with open("inputs/day11_sample.txt", "r") as sample_scenario_file:
+        sample_scenario = sample_scenario_file.read()
+
+    monkeys = read_scenario(sample_scenario)
+    for _ in range(20):
+        do_inspection_round(monkeys)
+
+    assert get_level_of_monkey_business(monkeys) == 10605

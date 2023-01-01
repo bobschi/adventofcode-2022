@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Self
 
 import aocd
+from tqdm import tqdm
 
 
 @dataclass
@@ -21,9 +22,15 @@ class Monkey:
         item_to_throw = self.worry_levels.pop(0)
         other.worry_levels.append(item_to_throw)
 
-    def inspect_item(self) -> int:
+    def inspect_item(self, global_modifier: int = 1) -> int:
         new_worry_level = eval(self.operation.replace("old", str(self.worry_levels[0])))
-        new_worry_level //= 3
+
+        if global_modifier == 1:
+            new_worry_level //= 3
+
+        else:
+            new_worry_level %= global_modifier
+
         self.worry_levels[0] = new_worry_level
 
         self.inspection_count += 1
@@ -67,10 +74,10 @@ def spawn_monkey(monkey_block: str) -> Monkey:
     return Monkey(**new_monkey_values)
 
 
-def do_inspection_round(monkeys: list[Monkey]) -> None:
+def do_inspection_round(monkeys: list[Monkey], global_modifier: int = 1) -> None:
     for monkey in monkeys:
         while monkey.worry_levels:
-            throw_to = monkey.inspect_item()
+            throw_to = monkey.inspect_item(global_modifier)
             monkey.throw_item(monkeys[throw_to])
 
 
@@ -97,5 +104,23 @@ def solve_part_one() -> None:
     aocd.submit(answer=solution, part="a", day=11, year=2022)
 
 
+def solve_part_two() -> None:
+    data = aocd.get_data(day=11, year=2022)
+
+    monkeys = read_scenario(data)
+
+    global_modifier = 1
+    for monkey in monkeys:
+        global_modifier *= monkey.divisor
+
+    for _ in tqdm(range(10000)):
+        do_inspection_round(monkeys, global_modifier)
+
+    solution = get_level_of_monkey_business(monkeys)
+
+    aocd.submit(answer=solution, part="b", day=11, year=2022)
+
+
 if __name__ == "__main__":
     solve_part_one()
+    solve_part_two()

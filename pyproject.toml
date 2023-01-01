@@ -10,6 +10,7 @@ packages = [{include = "adventofcode_2022"}]
 python = "^3.11"
 typer = "^0.7.0"
 advent-of-code-data = "^1.3.2"
+tqdm = "^4.64.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.12.0"
